@@ -125,6 +125,7 @@ router.get('/login', async function (req, res) {
     });
     }
 });
+//REGISTER STAFF
 router.post('/add/account/staff', async function (req, res) {
    
     let { email, password, firstName, lastName, birthdate, address, city, province, phone } = req.body;
