@@ -2,14 +2,14 @@ const { getDB } = require("../config/env");
 const sequelize = getDB();
 const { Model, DataTypes } = require("sequelize");
 
-class User extends Model {
+class Users extends Model {
     static associate(models){
     //   this.hasMany(models.Membership, { foreignKey: 'id_account' });
     //   this.hasMany(models.Content, { foreignKey: 'id_account' });
     //   this.hasMany(models.Saldo, { foreignKey: 'id_account' });
     }
   }
-User.init(
+Users.init(
     {
       id_user: {
         type: DataTypes.STRING(255),
@@ -60,11 +60,11 @@ User.init(
     {
       sequelize,
       timestamps: false,
-      modelName: "User",
+      modelName: "Users",
       tableName: "users",
     }
   );
   
-module.exports = User;
+module.exports = Users;
   
   
