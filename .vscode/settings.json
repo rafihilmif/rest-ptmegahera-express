@@ -1,0 +1,7 @@
+{
+    "screencastMode.keyboardShortcutsFormat": "command",
+    "editor.defaultFormatter": "ms-vscode.js-debug",
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    }
+}
