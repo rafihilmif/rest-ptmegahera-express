@@ -20,6 +20,10 @@ Users.init(
       type: DataTypes.STRING(255),
       allowNull: false
     },
+    username: {
+      type: DataTypes.STRING(255),
+      allowNull: false
+    },
     password: {
       type: DataTypes.STRING(255),
       allowNull: false

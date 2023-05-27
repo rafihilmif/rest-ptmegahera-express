@@ -4,6 +4,7 @@ const user = require("./routes/user");
 const category = require("./routes/category");
 const supplier = require("./routes/supplier");
 const product = require("./routes/product");
+const cart = require("./routes/cart");
 
 const Users = require("./models/Users");
 const Products = require("./models/Products");
@@ -25,6 +26,7 @@ app.use("/api", user);
 app.use("/api", category);
 app.use("/api", supplier);
 app.use("/api", product);
+app.use("/api", cart);
 
 app.listen(app.get("port"), () => {
     console.log(`Server started at http://localhost:${app.get("port")}`);

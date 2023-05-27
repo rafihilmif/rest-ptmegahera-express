@@ -74,7 +74,6 @@ router.post('/add/product', upload.single('picture'), async function (req, res) 
     let { name, description, price, quantity, brand, category } = req.body;
     let { picture } = req.file;
     const filePath = req.file.filename;
-
     const schema = Joi.object({
         name: Joi.string().external(checkProductName).required(),
         category: Joi.string().external(checkCategory).required(),
