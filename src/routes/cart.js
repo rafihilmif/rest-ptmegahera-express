@@ -41,6 +41,7 @@ const checkStock = async (quantity) => {
         throw new Error("out of stock!")
     }
 };
+//ADD CART WITH ROLE CUSTOMER
 router.post('/add/cart', async function (req, res) {
     let { name, quantity } = req.body;
     const schema = Joi.object({

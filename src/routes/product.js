@@ -70,6 +70,7 @@ const storage = multer.diskStorage({
     }
 });
 const upload = multer({ storage: storage });
+//ADD PRODUCT WTIH ROLE STAFF
 router.post('/add/product', upload.single('picture'), async function (req, res) {
     let { name, description, price, quantity, brand, category } = req.body;
     let { picture } = req.file;

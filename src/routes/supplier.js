@@ -37,7 +37,7 @@ const storage = multer.diskStorage({
     }
 });
 const upload = multer({ storage: storage });
-//ADD SUPPLIER
+//ADD SUPPLIER WITH ROLE STAFF
 router.post('/add/supplier', upload.single('logo'), async function (req, res) {
     let { name } = req.body;
     let { logo } = req.file;

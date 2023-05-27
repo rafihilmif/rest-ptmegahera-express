@@ -23,7 +23,7 @@ const checkCategoryAvailable = async (name) => {
         throw new Error("category can't be duplicate")
     }
 };
-//ADD CATEGORY
+//ADD CATEGORY WITH ROLE STAFF
 router.post('/add/category', async function (req, res) {
     let { name, description } = req.body;
     const schema = Joi.object({

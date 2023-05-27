@@ -197,6 +197,7 @@ router.post('/add/account/staff', async function (req, res) {
     }
 
 });
+//UPDATE USER BY USERNAME
 router.put('/update/account/:username', async function (req, res) {
 
     let { username } = req.params;
@@ -280,6 +281,7 @@ router.put('/update/account/:username', async function (req, res) {
     }
 
 });
+//GET ACCOUNT BY USERNAME
 router.get('/account/:username', async function (req, res) {
     let { username } = req.params;
 
@@ -323,7 +325,7 @@ router.get('/account/:username', async function (req, res) {
         return res.status(400).send('Invalid JWT Key');
     }
 });
-
+//GET ALL ACCOUNT
 router.get('/account', async function (req, res) {
     let token = req.header('x-auth-token');
     let userdata = jwt.verify(token, JWT_KEY);
@@ -360,6 +362,7 @@ router.get('/account', async function (req, res) {
         return res.status(400).send('Invalid JWT Key');
     }
 });
+//DELETE ACCOUNT
 router.delete('/delete/account/:username', async function (req, res) {
     let { username } = req.params;
     let token = req.header('x-auth-token');
