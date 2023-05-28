@@ -87,4 +87,207 @@ router.post('/add/category', async function (req, res) {
         return res.status(400).send('Invalid JWT Key');
     }
 });
+router.get('/category/:name', async function (req, res) {
+    let { name } = req.params;
+
+    let token = req.header('x-auth-token');
+    let userdata = jwt.verify(token, JWT_KEY);
+
+    if (!req.header('x-auth-token')) {
+        return res.status(400).send('Unauthorized')
+    }
+    const userMatch = await User.findAll({
+        where: {
+            id_user: {
+                [Op.like]: userdata.id_user
+            }
+        }
+    });
+    let tempIdUser = null;
+    userMatch.forEach(element => {
+        tempIdUser = element.id_user;
+    });
+
+    tempIdUser = tempIdUser.substr(0, 3);
+    try {
+        if (tempIdUser == "STF") {
+            const dataCategory = await Category.findAll({
+                where: {
+                    categoryName: {
+                        [Op.like]: name
+                    }
+                }
+            });
+            if (dataCategory.length === 0) {
+                return res.status(404).send("data category tidak ditemukan!");
+            }
+            else {
+                return res.status(200).send(dataCategory);
+            }
+        }
+        else {
+            return res.status(400).send('Bukan role Staff, tidak dapat menggunakan fitur');
+        }
+    } catch (error) {
+        return res.status(400).send('Invalid JWT Key');
+    }
+});
+router.get('/category', async function (req, res) {
+    let token = req.header('x-auth-token');
+    let userdata = jwt.verify(token, JWT_KEY);
+
+    if (!req.header('x-auth-token')) {
+        return res.status(400).send('Unauthorized')
+    }
+    const userMatch = await User.findAll({
+        where: {
+            id_user: {
+                [Op.like]: userdata.id_user
+            }
+        }
+    });
+    let tempIdUser = null;
+    userMatch.forEach(element => {
+        tempIdUser = element.id_user;
+    });
+
+    tempIdUser = tempIdUser.substr(0, 3);
+    try {
+        if (tempIdUser == "STF") {
+            const dataCategory = await Category.findAll();
+            if (dataCategory.length === 0) {
+                return res.status(404).send("data category kosong, silahkan tambah!");
+            }
+            else {
+                return res.status(200).send(dataCategory);
+            }
+        }
+        else {
+            return res.status(400).send('Bukan role Staff, tidak dapat menggunakan fitur');
+        }
+    } catch (error) {
+        return res.status(400).send('Invalid JWT Key');
+    }
+});
+router.put('/update/category/:name', async function (req, res) {
+    let { new_name, description } = req.body;
+    let { name } = req.params;
+    const schema = Joi.object({
+        new_name: Joi.string().external(checkCategoryAvailable).required(),
+        description: Joi.string().required()
+    });
+    try {
+        await schema.validateAsync(req.body)
+    } catch (error) {
+        return res.status(400).send(error.toString())
+    }
+    let token = req.header('x-auth-token');
+    let userdata = jwt.verify(token, JWT_KEY);
+    const userMatch = await User.findAll({
+        where: {
+            id_user: {
+                [Op.like]: userdata.id_user
+            }
+        }
+    });
+    let tempIdUser = null;
+    userMatch.forEach(element => {
+        tempIdUser = element.id_user;
+    });
+
+    tempIdUser = tempIdUser.substr(0, 3);
+    if (!req.header('x-auth-token')) {
+        return res.status(400).send('Unauthorized')
+    }
+    try {
+        if (tempIdUser == "STF") {
+            const dataCategory = await Category.findAll({
+                where: {
+                    categoryName: {
+                        [Op.like]: name
+                    }
+                }
+            });
+
+            if (dataCategory.length === 0) {
+                return res.status(404).send("data category tidak ditemukan!");
+            }
+            else {
+                const updateCategory = await Category.update({
+                    categoryName: new_name,
+                    categoryDesc: description
+                }, {
+                    where: {
+                        categoryName: {
+                            [Op.like]: name
+                        }
+                    }
+                });
+                return res.status(200).send({
+                    "message": "data category dengan old name " + name + " berhasil diubah",
+                    "category new name": new_name,
+                    "category description": description
+                });
+            }
+        }
+    } catch (error) {
+        return res.status(400).send('Invalid JWT Key');
+    }
+});
+router.delete('/delete/category/:name', async function (req, res) {
+    let { name } = req.params;
+
+    let token = req.header('x-auth-token');
+    let userdata = jwt.verify(token, JWT_KEY);
+    const userMatch = await User.findAll({
+        where: {
+            id_user: {
+                [Op.like]: userdata.id_user
+            }
+        }
+    });
+    let tempIdUser = null;
+    userMatch.forEach(element => {
+        tempIdUser = element.id_user;
+    });
+
+    tempIdUser = tempIdUser.substr(0, 3);
+    if (!req.header('x-auth-token')) {
+        return res.status(400).send('Unauthorized')
+    }
+    try {
+        if (tempIdUser == "STF") {
+            const dataCategory = await Category.findAll({
+                where: {
+                    categoryName: {
+                        [Op.like]: name
+                    }
+                }
+            });
+            if (dataCategory.length === 0) {
+                return res.status(404).send({
+                    message: "data dengan nama " + name + " tidak ditemukan!"
+                });
+            } else {
+                const deleteCategory = await Category.destroy({
+                    where: {
+                        categorName: {
+                            [Op.like]: name
+                        }
+                    }
+                });
+                return res.status(400).send({
+                    message: "data dengan name " + name + " berhasil dihapus!"
+                });
+            }
+
+        } else {
+            return res.status(400).send({
+                message: 'Bukan role Staff, tidak dapat menggunakan fitur'
+            });
+        }
+    } catch (error) {
+        return res.status(400).send('Invalid JWT Key');
+    }
+});
 module.exports = router;

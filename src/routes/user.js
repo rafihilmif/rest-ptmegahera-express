@@ -234,10 +234,9 @@ router.put('/update/account/:username', async function (req, res) {
                     }
                 }
             });
-            console.log(matchData);
             if (matchData.length === 0) {
                 return res.status(404).send({
-                    "message": "data tidak ditemukan!"
+                    message: "Data dengan username " + username + " tidak ditemukan!"
                 });
             }
             else {
@@ -308,7 +307,7 @@ router.get('/account/:username', async function (req, res) {
             );
             if (dataUser.length === 0) {
                 return res.status(404).send({
-                    message: 'User tidak ditemukan'
+                    message: "Data dengan username " + username + " tidak ditemukan!"
                 });
             }
             else {
@@ -373,16 +372,30 @@ router.delete('/delete/account/:username', async function (req, res) {
     }
     try {
         if (userdata.id_user == "ADMIN") {
-            const deleteAccount = await User.destroy({
+            const dataAccount = await User.findAll({
                 where: {
                     username: {
                         [Op.like]: username
                     }
                 }
             });
-            return res.status(400).send({
-                message: "data dengan username " + username + " berhasil dihapus!"
-            });
+            if (dataAccount.length === 0) {
+                return res.status(404).send({
+                    message: "Data dengan username " + username + " tidak ditemukan!"
+                });
+            } else {
+                const deleteAccount = await User.destroy({
+                    where: {
+                        username: {
+                            [Op.like]: username
+                        }
+                    }
+                });
+                return res.status(400).send({
+                    message: "data dengan username " + username + " berhasil dihapus!"
+                });
+            }
+
         } else {
             return res.status(400).send({
                 message: 'Bukan role Admin, tidak dapat menggunakan fitur'

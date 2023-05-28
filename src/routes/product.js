@@ -65,16 +65,43 @@ const storage = multer.diskStorage({
     destination: function name(req, file, cb) {
         cb(null, './assets/image/product');
     },
+    fileFilter: function name(req, file, cb) {
+        if (file.mimetype == "image/png"
+            || file.mimetype == "image/jpg"
+            || file.mimetype == "image/jpeg"
+            || file.mimetype == "image/gif") {
+            cb(null, true);
+        } else {
+            cb(null, false);
+            cb(new Error('Only .png, .gif, .jpg and .jpeg format allowed!'));
+        }
+    },
     filename: function name(req, file, cb) {
-        cb(null, `${Date.now()}.jpg`);
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+        const fileName = file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname);
+        cb(null, fileName);
+        req.on('aborted', () => {
+            const fullFilePath = path.join('assets', 'image', 'product', fileName);
+            file.stream.on('end', () => {
+                fs.unlink(fullFilePath, (err) => {
+                    console.log(fullFilePath);
+                    if (err) {
+                        throw err;
+                    }
+                });
+            });
+            file.stream.emit('end');
+        })
     }
+
 });
 const upload = multer({ storage: storage });
 //ADD PRODUCT WTIH ROLE STAFF
 router.post('/add/product', upload.single('picture'), async function (req, res) {
     let { name, description, price, quantity, brand, category } = req.body;
     let { picture } = req.file;
-    const filePath = req.file.filename;
+
+    const filePath = `${req.protocol}://${req.get('host')}/image/product/${req.file.filename}`;
     const schema = Joi.object({
         name: Joi.string().external(checkProductName).required(),
         category: Joi.string().external(checkCategory).required(),
@@ -172,10 +199,24 @@ router.post('/add/product', upload.single('picture'), async function (req, res) 
                 productDesc: description,
                 productPrice: price,
                 productQuantity: quantity,
-                productPicture: filePath,
+                productPicture: req.file.filename,
                 status: 1
             });
-            return res.status(201).send(newProduct);
+            return res.status(201).send({
+                message: "Berhasil menambahkan produk dengan nama" + name,
+                "id_product": newIdProduct,
+                "id_supplier": tempIdBrand,
+                "id_category": tempIdCategory,
+                "SKU": tempNameBrand + tempNameCategory + newIdSKU,
+                "name": name,
+                "description": description,
+                "price": price,
+                "qty": quantity,
+                "url-image-path": filePath
+            });
+        }
+        else {
+            return res.status(400).send('Bukan role Staff, tidak dapat menggunakan fitur');
         }
     } catch (error) {
         return res.status(400).send('Invalid JWT Key');
