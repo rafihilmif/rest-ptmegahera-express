@@ -110,6 +110,9 @@ router.post('/add/cart', async function (req, res) {
             });
             return res.status(201).send(newCart);
         }
+        else {
+            return res.status(400).send("Bukan role customer, tidak dapat menggunakan fitur!");
+        }
     } catch (error) {
         return res.status(400).send('Invalid JWT Key');
     }

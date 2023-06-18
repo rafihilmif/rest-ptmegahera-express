@@ -223,4 +223,64 @@ router.post('/add/product', upload.single('picture'), async function (req, res) 
     }
 
 });
+router.get('/product', async function (req, res) {
+    let { name, minPrice, maxPrice } = req.query;
+    let token = req.header('x-auth-token');
+    let userdata = jwt.verify(token, JWT_KEY);
+    const userMatch = await User.findAll({
+        where: {
+            id_user: {
+                [Op.like]: userdata.id_user
+            }
+        }
+    });
+    let tempIdUser = null;
+    userMatch.forEach(element => {
+        tempIdUser = element.id_user;
+    });
+
+    tempIdUser = tempIdUser.substr(0, 3);
+    if (!req.header('x-auth-token')) {
+        return res.status(400).send('Unauthorized')
+    }
+    try {
+        if (tempIdUser == "STF") {
+            const productData = await Products.findAll({});
+            if (productData.length === 0) {
+                return res.status(404).send('Product tidak ditemukan');
+            }
+            else {
+                if (name == '' && minPrice == '' && maxPrice == '') {
+                    return res.status(200).send(productData);
+                }
+                else if (minPrice == '' || maxPrice == '') {
+                    const productByName = await Products.findAll({
+                        where: {
+                            productName: {
+                                [Op.like]: name ? '%' + name + '%' : '%%'
+                            }
+                        }
+                    });
+                }
+                else {
+                    const productByNamePrice = await Products.findAll({
+                        where: {
+                            productName: {
+                                [Op.like]: name ? '%' + name + '%' : '%%'
+                            },
+                            productPrice: {
+                                [Op.between]: [minPrice, maxPrice]
+                            }
+                        }
+                    });
+                }
+            }
+        }
+        else {
+            return res.status(400).send('Bukan role Staff, tidak dapat menggunakan fitur');
+        }
+    } catch (error) {
+        return res.status(400).send('Invalid JWT Key');
+    }
+});
 module.exports = router;

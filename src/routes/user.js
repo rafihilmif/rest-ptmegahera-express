@@ -24,11 +24,27 @@ const checkEmail = async (email) => {
         throw new Error("email is not unique")
     }
 };
+const checkUsername = async (username) => {
+
+    const userEmail = await User.findOne(
+        {
+            where: {
+                username: {
+                    [Op.like]: username
+                }
+            }
+        }
+    );
+    if (userEmail) {
+        throw new Error("username is not unique")
+    }
+};
 //REGISTER CUSTOMER
-router.post('/add/account/customer', async function (req, res) {
-    let { email, password, firstName, lastName, birthdate, address, city, province, phone } = req.body;
+router.post('/register/account/customer', async function (req, res) {
+    let { email, username, password, firstName, lastName, birthdate, address, city, province, phone } = req.body;
     const schema = Joi.object({
         email: Joi.string().external(checkEmail).email({ minDomainSegments: 2, tlds: { allow: ['com'] } }).required(),
+        username: Joi.string().external(checkUsername).required(),
         password: Joi.string().required(),
         firstName: Joi.string().required(),
         lastName: Joi.string().required(),
@@ -55,23 +71,32 @@ router.post('/add/account/customer', async function (req, res) {
         }
     );
     let newIdCustomer = newIdPrefix + (similarUID.length + 1).toString().padStart(3, '0');
-    const passwordHash = bcrypt.hashSync(password, 10);
-    const newCustomer = await User.create({
-        id_user: newIdCustomer,
-        email: email,
-        password: passwordHash,
-        firstName: firstName,
-        lastName: lastName,
-        birthdate: birthdate,
-        address: address,
-        city: city,
-        province: province,
-        phone: phone,
-        status: 1
-    });
-    return res.status(201).send({
-        "message": "berhasil register",
-    });
+    if (email.indexOf('@ptmegahera.com') > -1) {
+        return res.status(400).send({
+            "message": "gagal registrasi",
+        });
+    }
+    else {
+        const passwordHash = bcrypt.hashSync(password, 10);
+        const newCustomer = await User.create({
+            id_user: newIdCustomer,
+            email: email,
+            username: username,
+            password: passwordHash,
+            firstName: firstName,
+            lastName: lastName,
+            birthdate: birthdate,
+            address: address,
+            city: city,
+            province: province,
+            phone: phone,
+            status: 1
+        });
+        return res.status(201).send({
+            "message": "berhasil register",
+        });
+
+    }
 });
 //LOGIN
 router.get('/login', async function (req, res) {
@@ -139,6 +164,7 @@ router.post('/add/account/staff', async function (req, res) {
     }
     const schema = Joi.object({
         email: Joi.string().external(checkEmail).email({ minDomainSegments: 2, tlds: { allow: ['com'] } }).required(),
+        username: Joi.string().external(checkUsername).required(),
         password: Joi.string().required(),
         firstName: Joi.string().required(),
         lastName: Joi.string().required(),
