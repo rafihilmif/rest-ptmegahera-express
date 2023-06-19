@@ -83,7 +83,7 @@ router.post('/register/account/developer', async function (req, res) {
 
     }
 });
-router.get('/register/account/developer', async function (req, res) {
+router.get('/developer/login', async function (req, res) {
 
 });
 module.exports = router;

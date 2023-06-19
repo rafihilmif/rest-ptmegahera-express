@@ -90,6 +90,7 @@ router.post('/checkout', async function (req, res) {
                         ]
                 }
             );
+
             let subtotal = 0;
             dataCost.forEach(element => {
                 subtotal = element.dataValues.cost;
@@ -111,7 +112,18 @@ router.post('/checkout', async function (req, res) {
                 total: subtotal,
                 status: "Waiting Confirmation"
             });
+            const deleteDataCart = await Cart.destroy(
+                {
+                    where: {
+                        id_user: {
+                            [Op.like]: userdata.id_user
+                        }
+                    },
+                    truncate: true
+                }
+            );
             return res.status(201).send({ subtotal });
+
         }
         else {
             return res.status(400).send("Bukan role customer, tidak dapat menggunakan fitur!");
