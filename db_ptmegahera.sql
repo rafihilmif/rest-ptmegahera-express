@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2023 at 12:32 PM
+-- Generation Time: Jun 18, 2023 at 02:46 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -39,6 +39,15 @@ CREATE TABLE `carts` (
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `carts`
+--
+
+INSERT INTO `carts` (`id_cart`, `id_user`, `id_product`, `productName`, `productPrice`, `quantity`, `created_at`) VALUES
+('CRT001', 'CST001', 'PRD001', 'AS', 15000, 5, '2023-06-07 21:09:37'),
+('CRT002', 'CST001', 'PRD001', 'AS', 15000, 2, '2023-06-07 22:42:11'),
+('CRT003', 'CST001', 'PRD001', 'AS', 15000, 3, '2023-06-07 23:32:26');
+
 -- --------------------------------------------------------
 
 --
@@ -58,6 +67,43 @@ CREATE TABLE `category` (
 
 INSERT INTO `category` (`id_category`, `categoryName`, `categoryDesc`, `status`) VALUES
 ('CAT001', 'lampu', '123', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `developer`
+--
+
+CREATE TABLE `developer` (
+  `id_developer` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `balance` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id_order` varchar(255) NOT NULL,
+  `id_user` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `courier` varchar(255) NOT NULL,
+  `deliverType` varchar(255) NOT NULL,
+  `deliverFee` int(13) NOT NULL,
+  `province` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `zipCode` varchar(255) NOT NULL,
+  `phone` int(16) NOT NULL,
+  `note` text NOT NULL,
+  `total` int(13) NOT NULL,
+  `status` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -83,7 +129,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id_product`, `id_supplier`, `id_category`, `sku`, `productName`, `productDesc`, `productPrice`, `productQuantity`, `productPicture`, `status`) VALUES
-('PRD001', 'SUP001', 'CAT001', 'HANLAMPSKN001', 'AS', 'asss', 12, 123, 'picture-1685290068104-679078337.docx', 1);
+('PRD001', 'SUP001', 'CAT001', 'HANLAMPSKN001', 'LAMP E', 'asss', 12, 123, 'picture-1685290068104-679078337.jpg', 1),
+('PRD002', 'SUP001', 'CAT001', 'HANLAMPSKN002', 'OWI', 'asss', 12, 123, 'picture-1685290068104-679078337.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -132,6 +179,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id_user`, `email`, `username`, `password`, `firstName`, `lastName`, `birthdate`, `address`, `city`, `province`, `phone`, `status`) VALUES
 ('ADMIN', 'admin@ptmegahera.com', NULL, '$2b$10$4dehBosAggDNkEJmBeYcYOxsX7kkw7QmhoQtT4SjuHRVoJEgmA14q', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
+('CST001', 'varg@gmail.com', 'kegelapans', '$2b$10$l.sFxWfsP.KmT4tgR7FaOuRjpoFPlnAkT5EKsQHnb1ZGBXotbJrc2', 'adu', 'adududu', '2021-12-04', 'adududud', 'adudud', 'adududu', '123123', 1),
 ('STF001', 'kuntowijo@ptmegahera.com', 'kuntowijo', '$2b$10$ujXcDIIGTjPxDiw4CI98T.LxTinR32y5Yc8JcDCvmdln/kZXZZtO6', 'Kunto', 'Wijoyo', '1995-12-03', 'Jalan Olahraga 5 No. 7', 'Surabaya', 'Jawa Timur', '08135155321', 1);
 
 --
@@ -149,6 +197,18 @@ ALTER TABLE `carts`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`id_category`);
+
+--
+-- Indexes for table `developer`
+--
+ALTER TABLE `developer`
+  ADD PRIMARY KEY (`id_developer`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id_order`);
 
 --
 -- Indexes for table `products`

@@ -87,52 +87,9 @@ router.post('/add/category', async function (req, res) {
         return res.status(400).send('Invalid JWT Key');
     }
 });
-router.get('/category/:name', async function (req, res) {
-    let { name } = req.params;
-
-    let token = req.header('x-auth-token');
-    let userdata = jwt.verify(token, JWT_KEY);
-
-    if (!req.header('x-auth-token')) {
-        return res.status(400).send('Unauthorized')
-    }
-    const userMatch = await User.findAll({
-        where: {
-            id_user: {
-                [Op.like]: userdata.id_user
-            }
-        }
-    });
-    let tempIdUser = null;
-    userMatch.forEach(element => {
-        tempIdUser = element.id_user;
-    });
-
-    tempIdUser = tempIdUser.substr(0, 3);
-    try {
-        if (tempIdUser == "STF") {
-            const dataCategory = await Category.findAll({
-                where: {
-                    categoryName: {
-                        [Op.like]: name
-                    }
-                }
-            });
-            if (dataCategory.length === 0) {
-                return res.status(404).send("data category tidak ditemukan!");
-            }
-            else {
-                return res.status(200).send(dataCategory);
-            }
-        }
-        else {
-            return res.status(400).send('Bukan role Staff, tidak dapat menggunakan fitur');
-        }
-    } catch (error) {
-        return res.status(400).send('Invalid JWT Key');
-    }
-});
+//GET CATEGORY ALL AND BY NAME
 router.get('/category', async function (req, res) {
+    let { name } = req.query;
     let token = req.header('x-auth-token');
     let userdata = jwt.verify(token, JWT_KEY);
 
@@ -146,20 +103,33 @@ router.get('/category', async function (req, res) {
             }
         }
     });
+
     let tempIdUser = null;
     userMatch.forEach(element => {
         tempIdUser = element.id_user;
     });
-
     tempIdUser = tempIdUser.substr(0, 3);
+
     try {
         if (tempIdUser == "STF") {
             const dataCategory = await Category.findAll();
             if (dataCategory.length === 0) {
-                return res.status(404).send("data category kosong, silahkan tambah!");
+                return res.status(404).send("Data Category tidak ditemukan!");
             }
             else {
-                return res.status(200).send(dataCategory);
+                if (name == null) {
+                    return res.status(200).send(dataCategory);
+                }
+                else {
+                    const dataCategoryByName = await Category.findAll({
+                        where: {
+                            categoryName: {
+                                [Op.like]: name ? '%' + name + '%' : '%%'
+                            }
+                        }
+                    });
+                    return res.status(200).send(dataCategoryByName);
+                }
             }
         }
         else {
@@ -169,6 +139,7 @@ router.get('/category', async function (req, res) {
         return res.status(400).send('Invalid JWT Key');
     }
 });
+//UPDATE CATEGORY BY NAME
 router.put('/update/category/:name', async function (req, res) {
     let { new_name, description } = req.body;
     let { name } = req.params;
@@ -234,6 +205,7 @@ router.put('/update/category/:name', async function (req, res) {
         return res.status(400).send('Invalid JWT Key');
     }
 });
+//DELETE CATEGORY BY NAME
 router.delete('/delete/category/:name', async function (req, res) {
     let { name } = req.params;
 
@@ -276,8 +248,8 @@ router.delete('/delete/category/:name', async function (req, res) {
                         }
                     }
                 });
-                return res.status(400).send({
-                    message: "data dengan name " + name + " berhasil dihapus!"
+                return res.status(200).send({
+                    message: "Data category " + name + " berhasil dihapus!"
                 });
             }
 

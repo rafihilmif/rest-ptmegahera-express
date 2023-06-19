@@ -5,17 +5,14 @@ const User = require("../models/Users");
 const Products = require("../models/Products");
 const Category = require("../models/Category");
 const Suppliers = require("../models/Suppliers");
-
 const multer = require('multer');
 const path = require('path');
 const Joi = require("joi");
+const fs = require('fs');
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
-
-
 const JWT_KEY = 'ptmegaheragunakarya';
-
 const checkProductName = async (name) => {
 
     const productName = await Products.findOne(
@@ -101,7 +98,8 @@ router.post('/add/product', upload.single('picture'), async function (req, res) 
     let { name, description, price, quantity, brand, category } = req.body;
     let { picture } = req.file;
 
-    const filePath = `${req.protocol}://${req.get('host')}/image/product/${req.file.filename}`;
+    const paths = `${req.protocol}://${req.get('host')}/image/product/${req.file.filename}`;
+    const filePath = req.file.filename;
     const schema = Joi.object({
         name: Joi.string().external(checkProductName).required(),
         category: Joi.string().external(checkCategory).required(),
@@ -150,7 +148,7 @@ router.post('/add/product', upload.single('picture'), async function (req, res) 
             let newIdProduct = newIdPrefix + (similarUID.length + 1).toString().padStart(3, '0');
 
             let newIdPrefixSKU = "SKN"
-            let keywordSKU = `%${newIdPrefix}%`
+            let keywordSKU = `%${newIdPrefixSKU}%`
             let similarUIDSKU = await Products.findAll(
                 {
                     where: {
@@ -199,7 +197,7 @@ router.post('/add/product', upload.single('picture'), async function (req, res) 
                 productDesc: description,
                 productPrice: price,
                 productQuantity: quantity,
-                productPicture: req.file.filename,
+                productPicture: filePath,
                 status: 1
             });
             return res.status(201).send({
@@ -212,7 +210,7 @@ router.post('/add/product', upload.single('picture'), async function (req, res) 
                 "description": description,
                 "price": price,
                 "qty": quantity,
-                "url-image-path": filePath
+                "url-image-path": paths
             });
         }
         else {
@@ -223,6 +221,7 @@ router.post('/add/product', upload.single('picture'), async function (req, res) 
     }
 
 });
+//GET PRODUCT BY NAME, MIN PRICE BETWEEN MAX PRICE
 router.get('/product', async function (req, res) {
     let { name, minPrice, maxPrice } = req.query;
     let token = req.header('x-auth-token');
@@ -250,10 +249,22 @@ router.get('/product', async function (req, res) {
                 return res.status(404).send('Product tidak ditemukan');
             }
             else {
-                if (name == '' && minPrice == '' && maxPrice == '') {
+                if (name == null && minPrice == null && maxPrice == null) {
+                    const productData = await Products.findAll({});
                     return res.status(200).send(productData);
                 }
-                else if (minPrice == '' || maxPrice == '') {
+                else if (name == null) {
+                    const productByPrice = await Products.findAll({
+                        where: {
+                            productPrice: {
+                                [Op.gte]: minPrice,
+                                [Op.lte]: maxPrice
+                            }
+                        }
+                    });
+                    return res.status(200).send(productByPrice);
+                }
+                else if (minPrice == null || maxPrice == null) {
                     const productByName = await Products.findAll({
                         where: {
                             productName: {
@@ -261,8 +272,10 @@ router.get('/product', async function (req, res) {
                             }
                         }
                     });
+                    return res.status(200).send(productByName);
                 }
-                else {
+                else if (minPrice != null && maxPrice != null) {
+
                     const productByNamePrice = await Products.findAll({
                         where: {
                             productName: {
@@ -273,11 +286,208 @@ router.get('/product', async function (req, res) {
                             }
                         }
                     });
+                    return res.status(200).send(productByNamePrice);
                 }
             }
         }
         else {
             return res.status(400).send('Bukan role Staff, tidak dapat menggunakan fitur');
+        }
+    } catch (error) {
+        return res.status(400).send('Invalid JWT Key');
+    }
+});
+//UPDATE PRODUCT BY NAME
+router.put('/update/product/:name', upload.single('picture'), async function (req, res) {
+    let { name } = req.params;
+    let { newName, description, price, quantity, brand, category } = req.body;
+    let { picture } = req.file;
+
+    const paths = `${req.protocol}://${req.get('host')}/image/product/${req.file.filename}`;
+    const filePath = req.file.filename;
+    let token = req.header('x-auth-token');
+    let userdata = jwt.verify(token, JWT_KEY);
+    const userMatch = await User.findAll({
+        where: {
+            id_user: {
+                [Op.like]: userdata.id_user
+            }
+        }
+    });
+    let tempIdUser = null;
+    userMatch.forEach(element => {
+        tempIdUser = element.id_user;
+    });
+    tempIdUser = tempIdUser.substr(0, 3);
+    if (!req.header('x-auth-token')) {
+        return res.status(400).send('Unauthorized')
+    }
+    let fileNameProduct = null;
+    const productNameFile = await Products.findAll({
+        where: {
+            productName: {
+                [Op.like]: name
+            }
+        }
+    });
+    productNameFile.forEach(element => {
+        fileNameProduct = element.productPicture;
+    });
+    try {
+        if (tempIdUser == "STF") {
+            const checkProduct = await Products.findAll({
+                where: {
+                    productName: {
+                        [Op.like]: name
+                    }
+                }
+            });
+            if (checkProduct.length === 0) {
+
+            }
+            else {
+                let newIdPrefixSKU = "SKN"
+                let keywordSKU = `%${newIdPrefixSKU}%`
+                let similarUIDSKU = await Products.findAll(
+                    {
+                        where: {
+                            sku: {
+                                [Op.like]: keyword
+                            }
+                        }
+                    }
+                );
+                let newIdSKU = newIdPrefixSKU + (similarUIDSKU.length + 1).toString().padStart(3, '0');
+
+                const dataBrand = await Suppliers.findAll({
+                    where: {
+                        companyName: {
+                            [Op.like]: brand
+                        }
+                    }
+                });
+                let tempIdBrand = null;
+                let tempNameBrand = null;
+                dataBrand.forEach(element => {
+                    tempIdBrand = element.id_supplier;
+                    tempNameBrand = element.companyName;
+                });
+                tempNameBrand = tempNameBrand.substr(0, 3).toUpperCase();
+                const dataCategory = await Category.findAll({
+                    where: {
+                        categoryName: {
+                            [Op.like]: category
+                        }
+                    }
+                });
+                let tempIdCategory = null;
+                let tempNameCategory = null;
+                dataCategory.forEach(element => {
+                    tempIdCategory = element.id_category;
+                    tempNameCategory = element.categoryName;
+                });
+                tempNameCategory = tempNameCategory.substr(0, 4).toUpperCase();
+                const newDataProduct = await Products.update({
+                    id_supplier: tempIdBrand,
+                    id_category: tempIdCategory,
+                    sku: tempNameBrand + tempNameCategory + newIdSKU,
+                    productName: newName,
+                    productDesc: description,
+                    productPrice: price,
+                    productQuantity: quantity,
+                    productPicture: filePath,
+                    status: 1
+                },
+                    {
+                        where: {
+                            productName: {
+                                [Op.like]: name
+                            }
+                        }
+                    });
+                fs.unlinkSync(`./assets/image/product/${fileNameProduct}`);
+                return res.status(201).send({
+                    message: "Berhasil mengubah produk dengan nama" + name,
+                    "id_supplier": tempIdBrand,
+                    "id_category": tempIdCategory,
+                    "SKU": tempNameBrand + tempNameCategory + newIdSKU,
+                    "name": newNamename,
+                    "description": description,
+                    "price": price,
+                    "qty": quantity,
+                    "url-image-path": paths
+                });
+            }
+        }
+        else {
+            return res.status(400).send('Bukan role Staff, tidak dapat menggunakan fitur');
+        }
+    } catch (error) {
+        return res.status(400).send('Invalid JWT Key');
+    }
+});
+//DELETE PRODUCT BY NAME
+router.delete('/delete/product/:name', async function (req, res) {
+    let { name } = req.params;
+    let token = req.header('x-auth-token');
+    let userdata = jwt.verify(token, JWT_KEY);
+    const userMatch = await User.findAll({
+        where: {
+            id_user: {
+                [Op.like]: userdata.id_user
+            }
+        }
+    });
+    let tempIdUser = null;
+    userMatch.forEach(element => {
+        tempIdUser = element.id_user;
+    });
+    tempIdUser = tempIdUser.substr(0, 3);
+    if (!req.header('x-auth-token')) {
+        return res.status(400).send('Unauthorized')
+    }
+    let fileNameProduct = null;
+    const productNameFile = await Products.findAll({
+        where: {
+            productName: {
+                [Op.like]: name
+            }
+        }
+    });
+    productNameFile.forEach(element => {
+        fileNameProduct = element.productPicture;
+    });
+    try {
+        if (tempIdUser == "STF") {
+            const dataProduct = await Products.findAll({
+                where: {
+                    productName: {
+                        [Op.like]: name
+                    }
+                }
+            });
+            if (dataProduct.length === 0) {
+                return res.status(404).send({
+                    "message": "Product tidak ditemukan!",
+                });
+            } else {
+                const deleteProduct = await Products.destroy({
+                    where: {
+                        productName: {
+                            [Op.like]: name
+                        }
+                    }
+                });
+                fs.unlinkSync(`./assets/image/product/${fileNameProduct}`);
+                return res.status(200).send({
+                    message: "Data product " + name + " berhasil dihapus!"
+                });
+            }
+        }
+        else {
+            return res.status(400).send({
+                message: 'Bukan role Staff, tidak dapat menggunakan fitur'
+            });
         }
     } catch (error) {
         return res.status(400).send('Invalid JWT Key');
