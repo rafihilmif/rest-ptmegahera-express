@@ -358,7 +358,6 @@ router.put('/update/product/:name', upload.single('picture'), async function (re
                     }
                 );
                 let newIdSKU = newIdPrefixSKU + (similarUIDSKU.length + 1).toString().padStart(3, '0');
-
                 const dataBrand = await Suppliers.findAll({
                     where: {
                         companyName: {
