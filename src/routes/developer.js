@@ -10,6 +10,7 @@ const Joi = require("joi");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const JWT_KEY = 'ptmegaheragunakarya';
+const bcrypt = require('bcrypt');
 
 const checkEmail = async (email) => {
 
@@ -43,7 +44,7 @@ const checkUsername = async (username) => {
 };
 //REGISTER DEVELOPER ACCOUNT
 router.post('/register/account/developer', async function (req, res) {
-    let { email, username, password, balance } = req.body;
+    let { email, username, password} = req.body;
     const schema = Joi.object({
         email: Joi.string().external(checkEmail).email({ minDomainSegments: 2, tlds: { allow: ['com'] } }).required(),
         username: Joi.string().external(checkUsername).required(),
@@ -65,7 +66,7 @@ router.post('/register/account/developer', async function (req, res) {
             }
         }
     );
-    let newIdCustomer = newIdPrefix + (similarUID.length + 1).toString().padStart(3, '0');
+    let newIdDev = newIdPrefix + (similarUID.length + 1).toString().padStart(3, '0');
     if (email.indexOf('@ptmegahera.com') > -1) {
         return res.status(400).send({
             "message": "gagal registrasi",
@@ -74,7 +75,7 @@ router.post('/register/account/developer', async function (req, res) {
     else {
         const passwordHash = bcrypt.hashSync(password, 10);
         const newDeveloper = await Developer.create({
-            id_user: newIdCustomer,
+            id_developer: newIdDev,
             email: email,
             username: username,
             password: passwordHash,
@@ -112,7 +113,7 @@ router.get('/developer/login', async function (req, res) {
                 }
             });
             let token = jwt.sign({
-                id_user: tempDataDev.id_developer,
+                id_developer: tempDataDev.id_developer,
                 email: email,
                 username: tempDataDev.username,
                 balance: tempDataDev.balance
@@ -154,11 +155,12 @@ router.get('/developer/product', async function (req, res) {
     });
 
     tempIdDev = tempIdDev.substr(0, 3);
+    console.log(tempIdDev);
     if (!req.header('x-auth-token')) {
         return res.status(400).send('Unauthorized')
     }
     try {
-        if (tempIdUser == "DEV") {
+        if (tempIdDev == "DEV") {
             const productData = await Products.findAll({});
             if (parseInt(balanceOld) < 500) {
                 return res.status(404).send('Balance tidak mencukupi, silahkan top-up!');
@@ -301,7 +303,7 @@ router.get('/developer/supplier', async function (req, res) {
         return res.status(400).send('Unauthorized')
     }
     try {
-        if (tempIdUser == "DEV") {
+        if (tempIdDev == "DEV") {
             if (parseInt(balanceOld) < 500) {
                 return res.status(404).send('Balance tidak mencukupi, silahkan top-up!');
             }
@@ -397,7 +399,7 @@ router.get('/developer/category', async function (req, res) {
         return res.status(400).send('Unauthorized')
     }
     try {
-        if (tempIdUser == "DEV") {
+        if (tempIdDev == "DEV") {
             if (parseInt(balanceOld) < 500) {
                 return res.status(404).send('Balance tidak mencukupi, silahkan top-up!');
             }
@@ -482,8 +484,8 @@ router.post('/developer/topup', async function (req, res) {
         return res.status(400).send('Unauthorized')
     }
     try {
-        if (tempIdUser == "DEV") {
-            let tempBalanceNew = parseInt(balanceOld) + balanceNew;
+        if (tempIdDev == "DEV") {
+            let tempBalanceNew = parseInt(balanceOld) + parseInt(balanceNew);
             const updateBalance = await Developer.update({
                 balance: tempBalanceNew
             }, {
@@ -494,6 +496,7 @@ router.post('/developer/topup', async function (req, res) {
                 }
             }
             );
+            return res.status(200).send('BERHASIL TOP UP ' + balanceNew);
         }
         else {
             return res.status(400).send({

@@ -71,7 +71,10 @@ router.post('/add/cart', async function (req, res) {
     if (!req.header('x-auth-token')) {
         return res.status(400).send('Unauthorized')
     }
-    if (tempIdUser == "CST") {
+    
+    try {
+
+        if (tempIdUser == "CST") {
             let newIdPrefix = "CRT"
             let keyword = `%${newIdPrefix}%`
             let similarUID = await Cart.findAll(
@@ -152,11 +155,10 @@ router.post('/add/cart', async function (req, res) {
         else {
             return res.status(400).send("Bukan role customer, tidak dapat menggunakan fitur!");
         }
-    // try {
         
-    // } catch (error) {
-    //     return res.status(400).send('Invalid JWT Key');
-    // }
+    } catch (error) {
+        return res.status(400).send('Invalid JWT Key');
+    }
 });
 //GET ALL DATA CART
 router.get('/cart', async function (req, res) {
