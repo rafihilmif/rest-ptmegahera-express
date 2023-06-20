@@ -144,14 +144,14 @@ router.get('/supplier', async function (req, res) {
                     return res.status(200).send(dataSupplier);
                 }
                 else {
-                    const dataSupllierName = await Suppliers.findAll({
+                    const dataSupplierName = await Suppliers.findAll({
                         where: {
                             companyName: {
                                 [Op.like]: name ? '%' + name + '%' : '%%'
                             }
                         }
                     });
-                    return res.status(200).send(dataSupllierName);
+                    return res.status(200).send(dataSupplierName);
                 }
             }
         } else {
