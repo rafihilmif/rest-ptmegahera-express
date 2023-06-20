@@ -4,9 +4,6 @@ const { Model, DataTypes } = require("sequelize");
 
 class Users extends Model {
   static associate(models) {
-    //   this.hasMany(models.Membership, { foreignKey: 'id_account' });
-    //   this.hasMany(models.Content, { foreignKey: 'id_account' });
-    //   this.hasMany(models.Saldo, { foreignKey: 'id_account' });
   }
 }
 Users.init(
