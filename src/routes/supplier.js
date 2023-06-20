@@ -257,7 +257,7 @@ router.put('/update/supplier/:name', upload.single('logo'), async function (req,
         return res.status(400).send('Invalid JWT Key');
     }
 });
-//DELETE SUPPLIER BY NAME
+//DELETE SUPPLIER BY NAME COMPANY
 router.delete('/delete/supplier/:name', async function (req, res) {
     let { name } = req.params;
     let token = req.header('x-auth-token');
