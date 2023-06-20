@@ -206,7 +206,7 @@ router.post('/add/account/staff', async function (req, res) {
                 city: city,
                 province: province,
                 phone: phone,
-                status: 1
+                status: 11
             });
             return res.status(201).send({
                 "message": "berhasil register",

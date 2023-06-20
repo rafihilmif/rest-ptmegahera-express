@@ -71,9 +71,7 @@ router.post('/add/cart', async function (req, res) {
     if (!req.header('x-auth-token')) {
         return res.status(400).send('Unauthorized')
     }
-
-    try {
-        if (tempIdUser == "CST") {
+    if (tempIdUser == "CST") {
             let newIdPrefix = "CRT"
             let keyword = `%${newIdPrefix}%`
             let similarUID = await Cart.findAll(
@@ -89,7 +87,7 @@ router.post('/add/cart', async function (req, res) {
             const checkDup = await Cart.findAll({
                 where: {
                     productName: {
-                        name
+                        [Op.like]: name
                     }
                 }
             });
@@ -122,7 +120,7 @@ router.post('/add/cart', async function (req, res) {
                 const checkQtyOld = await Cart.findAll({
                     where: {
                         productName: {
-                            name
+                            [Op.like]: name
                         }
                     }
                 });
@@ -146,15 +144,19 @@ router.post('/add/cart', async function (req, res) {
                         }
                     }
                 );
+                return res.status(201).send(
+                "Quantity Berhasil Ditambahkan"
+                );
             }
         }
         else {
             return res.status(400).send("Bukan role customer, tidak dapat menggunakan fitur!");
         }
-    } catch (error) {
-        return res.status(400).send('Invalid JWT Key');
-    }
-
+    // try {
+        
+    // } catch (error) {
+    //     return res.status(400).send('Invalid JWT Key');
+    // }
 });
 //GET ALL DATA CART
 router.get('/cart', async function (req, res) {
