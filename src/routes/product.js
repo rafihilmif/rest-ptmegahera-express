@@ -133,93 +133,94 @@ router.post('/add/product', upload.single('picture'), async function (req, res) 
     if (!req.header('x-auth-token')) {
         return res.status(400).send('Unauthorized')
     }
-
-    try {
-        if (tempIdUser == "STF") {
-            let newIdPrefix = "PRD"
-            let keyword = `%${newIdPrefix}%`
-            let similarUID = await Products.findAll(
-                {
-                    where: {
-                        id_product: {
-                            [Op.like]: keyword
-                        }
-                    }
-                }
-            );
-            let newIdProduct = newIdPrefix + (similarUID.length + 1).toString().padStart(3, '0');
-            let newIdPrefixSKU = "SKN"
-            let keywordSKU = `%${newIdPrefixSKU}%`
-            let similarUIDSKU = await Products.findAll(
-                {
-                    where: {
-                        sku: {
-                            [Op.like]: keyword
-                        }
-                    }
-                }
-            );
-            let newIdSKU = newIdPrefixSKU + (similarUIDSKU.length + 1).toString().padStart(3, '0');
-            const dataBrand = await Suppliers.findAll({
+    if (tempIdUser == "STF") {
+        let newIdPrefix = "PRD"
+        let keyword = `%${newIdPrefix}%`
+        let similarUID = await Products.findAll(
+            {
                 where: {
-                    companyName: {
-                        [Op.like]: brand
+                    id_product: {
+                        [Op.like]: keyword
                     }
                 }
-            });
-            let tempIdBrand = null;
-            let tempNameBrand = null;
-            dataBrand.forEach(element => {
-                tempIdBrand = element.id_supplier;
-                tempNameBrand = element.companyName;
-            });
-            tempNameBrand = tempNameBrand.substr(0, 3).toUpperCase();
-            const dataCategory = await Category.findAll({
+            }
+        );
+        let newIdProduct = newIdPrefix + (similarUID.length + 2).toString().padStart(3, '0');
+        let newIdPrefixSKU = "SKN"
+        let keywordSKU = `%${newIdPrefixSKU}%`
+        let similarUIDSKU = await Products.findAll(
+            {
                 where: {
-                    categoryName: {
-                        [Op.like]: category
+                    sku: {
+                        [Op.like]: keyword
                     }
                 }
-            });
-            let tempIdCategory = null;
-            let tempNameCategory = null;
-            dataCategory.forEach(element => {
-                tempIdCategory = element.id_category;
-                tempNameCategory = element.categoryName;
-            });
-            tempNameCategory = tempNameCategory.substr(0, 4).toUpperCase();
-            const newProduct = await Products.create({
-                id_product: newIdProduct,
-                id_supplier: tempIdBrand,
-                id_category: tempIdCategory,
-                sku: tempNameBrand + tempNameCategory + newIdSKU,
-                productName: name,
-                productDesc: description,
-                productPrice: price,
-                productQuantity: quantity,
-                productPicture: filePath,
-                status: 1
-            });
-            return res.status(201).send({
-                message: "Berhasil menambahkan produk dengan nama" + name,
-                "id_product": newIdProduct,
-                "id_supplier": tempIdBrand,
-                "id_category": tempIdCategory,
-                "SKU": tempNameBrand + tempNameCategory + newIdSKU,
-                "name": name,
-                "description": description,
-                "price": price,
-                "qty": quantity,
-                "url-image-path": paths
-            });
-        }
-        else {
-            fs.unlinkSync(`./assets/image/product/${req.file.filename}`);
-            return res.status(400).send('Bukan role Staff, tidak dapat menggunakan fitur');
-        }
-    } catch (error) {
-        return res.status(400).send('Invalid JWT Key');
+            }
+        );
+        let newIdSKU = newIdPrefixSKU + (similarUIDSKU.length + 1).toString().padStart(3, '0');
+        const dataBrand = await Suppliers.findAll({
+            where: {
+                companyName: {
+                    [Op.like]: brand
+                }
+            }
+        });
+        let tempIdBrand = null;
+        let tempNameBrand = null;
+        dataBrand.forEach(element => {
+            tempIdBrand = element.id_supplier;
+            tempNameBrand = element.companyName;
+        });
+        tempNameBrand = tempNameBrand.substr(0, 3).toUpperCase();
+        const dataCategory = await Category.findAll({
+            where: {
+                categoryName: {
+                    [Op.like]: category
+                }
+            }
+        });
+        let tempIdCategory = null;
+        let tempNameCategory = null;
+        dataCategory.forEach(element => {
+            tempIdCategory = element.id_category;
+            tempNameCategory = element.categoryName;
+        });
+        tempNameCategory = tempNameCategory.substr(0, 4).toUpperCase();
+        const newProduct = await Products.create({
+            id_product: newIdProduct,
+            id_supplier: tempIdBrand,
+            id_category: tempIdCategory,
+            sku: tempNameBrand + tempNameCategory + newIdSKU,
+            productName: name,
+            productDesc: description,
+            productPrice: price,
+            productQuantity: quantity,
+            productPicture: filePath,
+            status: 1
+        });
+        return res.status(201).send({
+            message: "Berhasil menambahkan produk dengan nama" + name,
+            "id_product": newIdProduct,
+            "id_supplier": tempIdBrand,
+            "id_category": tempIdCategory,
+            "SKU": tempNameBrand + tempNameCategory + newIdSKU,
+            "name": name,
+            "description": description,
+            "price": price,
+            "qty": quantity,
+            "url-image-path": paths
+        });
     }
+    else {
+        fs.unlinkSync(`./assets/image/product/${req.file.filename}`);
+        return res.status(400).send('Bukan role Staff, tidak dapat menggunakan fitur');
+    }
+
+
+    // try {
+    // } catch (error) {
+    //     return res.status(400).send('Invalid JWT Key');
+    // }
 
 });
 //GET PRODUCT BY NAME, MIN PRICE BETWEEN MAX PRICE

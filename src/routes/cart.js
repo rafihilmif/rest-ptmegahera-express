@@ -247,7 +247,9 @@ router.put('/update/cart', async function (req, res) {
                     }
                 }
             );
+            return res.status(201).send('Cart Berhasil Di Update');
         }
+        
     } catch (error) {
         return res.status(400).send('Invalid JWT Key');
     }
@@ -297,7 +299,9 @@ router.delete('/cart', async function (req, res) {
                     }
                 }
             );
+            return res.status(201).send("Cart Telah Di Hapus");
         }
+       
     } catch (error) {
         return res.status(400).send('Invalid JWT Key');
     }
