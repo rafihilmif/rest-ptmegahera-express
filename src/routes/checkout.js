@@ -154,7 +154,7 @@ router.post('/checkout', async function (req, res) {
         return res.status(400).send('Invalid JWT Key');
     }
 });
-router.post('/payment', async function (req, res) {
+router.post('/charge', async function (req, res) {
     let token = req.header('x-auth-token');
     let userdata = jwt.verify(token, JWT_KEY);
     const userMatch = await User.findAll({
