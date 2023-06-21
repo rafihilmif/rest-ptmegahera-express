@@ -224,9 +224,9 @@ router.post('/add/account/staff', async function (req, res) {
 
 });
 //UPDATE USER BY USERNAME
-router.put('/update/account/:username', async function (req, res) {
+router.put('/update/account', async function (req, res) {
 
-    let { username } = req.params;
+    let { username } = req.query;
     let { password, firstName, lastName, birthdate, address, city, province, phone } = req.body;
 
     let token = req.header('x-auth-token');
@@ -307,8 +307,8 @@ router.put('/update/account/:username', async function (req, res) {
 
 });
 //GET ACCOUNT BY USERNAME
-router.get('/account/:username', async function (req, res) {
-    let { username } = req.params;
+router.get('/account', async function (req, res) {
+    let { username } = req.query;
 
     let token = req.header('x-auth-token');
     let userdata = jwt.verify(token, JWT_KEY);
@@ -388,8 +388,8 @@ router.get('/account', async function (req, res) {
     }
 });
 //DELETE ACCOUNT
-router.delete('/delete/account/:username', async function (req, res) {
-    let { username } = req.params;
+router.delete('/delete/account', async function (req, res) {
+    let { username } = req.query;
     let token = req.header('x-auth-token');
     let userdata = jwt.verify(token, JWT_KEY);
 

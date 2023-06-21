@@ -164,8 +164,8 @@ router.get('/supplier', async function (req, res) {
     }
 });
 //UPDATE SUPPLIER BY NAME
-router.put('/update/supplier/:name', upload.single('logo'), async function (req, res) {
-    let { name } = req.params;
+router.put('/update/supplier', upload.single('logo'), async function (req, res) {
+    let { name } = req.query;
     let { newName } = req.body;
     let { logo } = req.file;
 

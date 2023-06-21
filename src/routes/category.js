@@ -140,9 +140,9 @@ router.get('/category', async function (req, res) {
     }
 });
 //UPDATE CATEGORY BY NAME
-router.put('/update/category/:name', async function (req, res) {
+router.put('/update/category', async function (req, res) {
     let { new_name, description } = req.body;
-    let { name } = req.params;
+    let { name } = req.query;
     const schema = Joi.object({
         new_name: Joi.string().external(checkCategoryAvailable).required(),
         description: Joi.string().required()
@@ -206,8 +206,8 @@ router.put('/update/category/:name', async function (req, res) {
     }
 });
 //DELETE CATEGORY BY NAME
-router.delete('/delete/category/:name', async function (req, res) {
-    let { name } = req.params;
+router.delete('/delete/category', async function (req, res) {
+    let { name } = req.query;
 
     let token = req.header('x-auth-token');
     let userdata = jwt.verify(token, JWT_KEY);

@@ -106,12 +106,14 @@ router.post('/add/product', upload.single('picture'), async function (req, res) 
         brand: Joi.string().external(checkSupplier).required(),
         description: Joi.string().required(),
         price: Joi.number().required(),
-        quantity: Joi.number().required()
+        quantity: Joi.number().required(),
+        picture: Joi.any()
     });
     try {
         await schema.validateAsync(req.body)
     } catch (error) {
-        return res.status(400).send(error.toString())
+        fs.unlinkSync(`./assets/image/product/${req.file.filename}`);
+        return res.status(400).send(error.toString());
     }
     let token = req.header('x-auth-token');
     let userdata = jwt.verify(token, JWT_KEY);
@@ -146,7 +148,6 @@ router.post('/add/product', upload.single('picture'), async function (req, res) 
                 }
             );
             let newIdProduct = newIdPrefix + (similarUID.length + 1).toString().padStart(3, '0');
-
             let newIdPrefixSKU = "SKN"
             let keywordSKU = `%${newIdPrefixSKU}%`
             let similarUIDSKU = await Products.findAll(
@@ -159,7 +160,6 @@ router.post('/add/product', upload.single('picture'), async function (req, res) 
                 }
             );
             let newIdSKU = newIdPrefixSKU + (similarUIDSKU.length + 1).toString().padStart(3, '0');
-
             const dataBrand = await Suppliers.findAll({
                 where: {
                     companyName: {
@@ -214,6 +214,7 @@ router.post('/add/product', upload.single('picture'), async function (req, res) 
             });
         }
         else {
+            fs.unlinkSync(`./assets/image/product/${req.file.filename}`);
             return res.status(400).send('Bukan role Staff, tidak dapat menggunakan fitur');
         }
     } catch (error) {
@@ -298,8 +299,8 @@ router.get('/product', async function (req, res) {
     }
 });
 //UPDATE PRODUCT BY NAME
-router.put('/update/product/:name', upload.single('picture'), async function (req, res) {
-    let { name } = req.params;
+router.put('/update/product', upload.single('picture'), async function (req, res) {
+    let { name } = req.query;
     let { newName, description, price, quantity, brand, category } = req.body;
     let { picture } = req.file;
 
@@ -333,97 +334,100 @@ router.put('/update/product/:name', upload.single('picture'), async function (re
     productNameFile.forEach(element => {
         fileNameProduct = element.productPicture;
     });
-    try {
-        if (tempIdUser == "STF") {
-            const checkProduct = await Products.findAll({
+    if (tempIdUser == "STF") {
+        const checkProduct = await Products.findAll({
+            where: {
+                productName: {
+                    [Op.like]: name
+                }
+            }
+        });
+        if (checkProduct.length === 0) {
+            fs.unlinkSync(`./assets/image/product/${req.file.filename}`);
+            return res.status(400).send('Data produk tidak ditemukan');
+        }
+        else {
+            let newIdPrefixSKU = "SKN"
+            let keywordSKU = `%${newIdPrefixSKU}%`
+            let similarUIDSKU = await Products.findAll(
+                {
+                    where: {
+                        sku: {
+                            [Op.like]: keywordSKU
+                        }
+                    }
+                }
+            );
+            let newIdSKU = newIdPrefixSKU + (similarUIDSKU.length + 1).toString().padStart(3, '0');
+            const dataBrand = await Suppliers.findAll({
                 where: {
-                    productName: {
-                        [Op.like]: name
+                    companyName: {
+                        [Op.like]: brand
                     }
                 }
             });
-            if (checkProduct.length === 0) {
-
-            }
-            else {
-                let newIdPrefixSKU = "SKN"
-                let keywordSKU = `%${newIdPrefixSKU}%`
-                let similarUIDSKU = await Products.findAll(
-                    {
-                        where: {
-                            sku: {
-                                [Op.like]: keyword
-                            }
-                        }
+            let tempIdBrand = null;
+            let tempNameBrand = null;
+            dataBrand.forEach(element => {
+                tempIdBrand = element.id_supplier;
+                tempNameBrand = element.companyName;
+            });
+            tempNameBrand = tempNameBrand.substr(0, 3).toUpperCase();
+            const dataCategory = await Category.findAll({
+                where: {
+                    categoryName: {
+                        [Op.like]: category
                     }
-                );
-                let newIdSKU = newIdPrefixSKU + (similarUIDSKU.length + 1).toString().padStart(3, '0');
-                const dataBrand = await Suppliers.findAll({
+                }
+            });
+            let tempIdCategory = null;
+            let tempNameCategory = null;
+            dataCategory.forEach(element => {
+                tempIdCategory = element.id_category;
+                tempNameCategory = element.categoryName;
+            });
+            tempNameCategory = tempNameCategory.substr(0, 4).toUpperCase();
+            const newDataProduct = await Products.update({
+                id_supplier: tempIdBrand,
+                id_category: tempIdCategory,
+                sku: tempNameBrand + tempNameCategory + newIdSKU,
+                productName: newName,
+                productDesc: description,
+                productPrice: price,
+                productQuantity: quantity,
+                productPicture: filePath,
+                status: 1
+            },
+                {
                     where: {
-                        companyName: {
-                            [Op.like]: brand
+                        productName: {
+                            [Op.like]: name
                         }
                     }
                 });
-                let tempIdBrand = null;
-                let tempNameBrand = null;
-                dataBrand.forEach(element => {
-                    tempIdBrand = element.id_supplier;
-                    tempNameBrand = element.companyName;
-                });
-                tempNameBrand = tempNameBrand.substr(0, 3).toUpperCase();
-                const dataCategory = await Category.findAll({
-                    where: {
-                        categoryName: {
-                            [Op.like]: category
-                        }
-                    }
-                });
-                let tempIdCategory = null;
-                let tempNameCategory = null;
-                dataCategory.forEach(element => {
-                    tempIdCategory = element.id_category;
-                    tempNameCategory = element.categoryName;
-                });
-                tempNameCategory = tempNameCategory.substr(0, 4).toUpperCase();
-                const newDataProduct = await Products.update({
-                    id_supplier: tempIdBrand,
-                    id_category: tempIdCategory,
-                    sku: tempNameBrand + tempNameCategory + newIdSKU,
-                    productName: newName,
-                    productDesc: description,
-                    productPrice: price,
-                    productQuantity: quantity,
-                    productPicture: filePath,
-                    status: 1
-                },
-                    {
-                        where: {
-                            productName: {
-                                [Op.like]: name
-                            }
-                        }
-                    });
-                fs.unlinkSync(`./assets/image/product/${fileNameProduct}`);
-                return res.status(201).send({
-                    message: "Berhasil mengubah produk dengan nama" + name,
-                    "id_supplier": tempIdBrand,
-                    "id_category": tempIdCategory,
-                    "SKU": tempNameBrand + tempNameCategory + newIdSKU,
-                    "name": newNamename,
-                    "description": description,
-                    "price": price,
-                    "qty": quantity,
-                    "url-image-path": paths
-                });
-            }
+            fs.unlinkSync(`./assets/image/product/${fileNameProduct}`);
+            return res.status(201).send({
+                message: "Berhasil mengubah produk dengan nama " + name,
+                "id_supplier": tempIdBrand,
+                "id_category": tempIdCategory,
+                "SKU": tempNameBrand + tempNameCategory + newIdSKU,
+                "name": newName,
+                "description": description,
+                "price": price,
+                "qty": quantity,
+                "url-image-path": paths
+            });
         }
-        else {
-            return res.status(400).send('Bukan role Staff, tidak dapat menggunakan fitur');
-        }
-    } catch (error) {
-        return res.status(400).send('Invalid JWT Key');
     }
+    else {
+        fs.unlinkSync(`./assets/image/product/${req.file.filename}`);
+        return res.status(400).send('Bukan role Staff, tidak dapat menggunakan fitur');
+    }
+    // try {
+        
+    // } catch (error) {
+    //     return res.status(400).send('Invalid JWT Key');
+    // }
 });
 //DELETE PRODUCT BY NAME
 router.delete('/delete/product/:name', async function (req, res) {

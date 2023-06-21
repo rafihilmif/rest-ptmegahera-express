@@ -4,6 +4,7 @@ const { Op, Sequelize } = require("sequelize");
 const User = require("../models/Users");
 const Cart = require("../models/Cart");
 const Orders = require("../models/Orders");
+const Shipping = require("../models/Shipping");
 const Joi = require("joi");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
@@ -15,17 +16,30 @@ let coreClient = new midtransClient.Snap({
     serverKey: "SB-Mid-server-XxmjTZyiAUYtY8YrH2pH8FbJ",
     clientKey: "SB-Mid-client-F3IpcrwFPVfo0Wxp"
 });
+const checkShipping = async (courier) => {
 
+    const categoryName = await Shipping.findOne(
+        {
+            where: {
+                company_name: {
+                    [Op.like]: courier
+                }
+            }
+        }
+    );
+    if (!categoryName) {
+        throw new Error("shipping not found!");
+    }
+};
 router.post('/checkout', async function (req, res) {
-    let { name, courier, deliver_type, deliver_fee, address, zipcode, city, province, phone, note } = req.body;
+    let { name, courier, address, zipcode, city, province, phone, note } = req.body;
     const schema = Joi.object({
         name: Joi.string().required(),
-        courier: Joi.number().required(),
-        deliver_type: Joi.string.required(),
+        courier: Joi.string().external(checkShipping).required(),
         address: Joi.string().required(),
         zipcode: Joi.string().required(),
         city: Joi.string().required(),
-        phone: Joi.string().required(),
+        phone: Joi.number().required(),
     });
     try {
         await schema.validateAsync(req.body)
@@ -45,7 +59,6 @@ router.post('/checkout', async function (req, res) {
     userMatch.forEach(element => {
         tempIdUser = element.id_user;
     });
-
     tempIdUser = tempIdUser.substr(0, 3);
     if (!req.header('x-auth-token')) {
         return res.status(400).send('Unauthorized')
@@ -90,19 +103,28 @@ router.post('/checkout', async function (req, res) {
                         ]
                 }
             );
-
+            let fee = 0;
+            const checkCourier = await Shipping.findAll({
+                where: {
+                    company_name: {
+                        [Op.like]: courier
+                    }
+                }
+            });
+            checkCourier.forEach(element => {
+                fee = element.dataValues.fee_shippings;
+            });
             let subtotal = 0;
             dataCost.forEach(element => {
                 subtotal = element.dataValues.cost;
             });
-            subtotal = parseInt(subtotal) + parseInt(deliver_fee);
+            subtotal = parseInt(subtotal) + parseInt(fee);
             const newOrder = await Orders.create({
                 id_order: newIdOrder,
                 id_user: userdata.id_user,
                 name: name,
                 courier: courier,
-                deliverType: deliver_type,
-                deliverFee: deliver_fee,
+                deliverFee: fee,
                 address: address,
                 city: city,
                 province: province,
@@ -133,7 +155,6 @@ router.post('/checkout', async function (req, res) {
     }
 });
 router.post('/payment', async function (req, res) {
-
     let token = req.header('x-auth-token');
     let userdata = jwt.verify(token, JWT_KEY);
     const userMatch = await User.findAll({
@@ -155,7 +176,6 @@ router.post('/payment', async function (req, res) {
         tempLastName = element.lastName;
         tempTelephone = element.phone;
     });
-
     tempIdUser = tempIdUser.substr(0, 3);
     if (!req.header('x-auth-token')) {
         return res.status(400).send('Unauthorized')
@@ -207,6 +227,5 @@ router.post('/payment', async function (req, res) {
     } catch (error) {
 
     }
-
 });
 module.exports = router;

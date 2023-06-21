@@ -28,10 +28,6 @@ Orders.init(
             type: DataTypes.STRING(255),
             allowNull: false
         },
-        deliverType: {
-            type: DataTypes.STRING(255),
-            allowNull: false
-        },
         deliverFee: {
             type: DataTypes.INTEGER(13),
             allowNull: false
@@ -58,7 +54,7 @@ Orders.init(
         },
         note: {
             type: DataTypes.TEXT(),
-            allowNull: false
+            allowNull: true
         }
         ,
         status: {
