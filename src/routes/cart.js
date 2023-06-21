@@ -199,8 +199,8 @@ router.get('/cart', async function (req, res) {
     }
 });
 //UPDATE DATA CART BY NAME
-router.put('/update/cart/:name', async function (req, res) {
-    let { name } = req.params;
+router.put('/update/cart', async function (req, res) {
+    let { name } = req.query;
     let { quantity } = req.body;
     let token = req.header('x-auth-token');
     let userdata = jwt.verify(token, JWT_KEY);
@@ -255,8 +255,8 @@ router.put('/update/cart/:name', async function (req, res) {
     }
 });
 //DELETE DATA CART BY NAME
-router.delete('/cart/:name', async function (req, res) {
-    let { name } = req.params;
+router.delete('/cart', async function (req, res) {
+    let { name } = req.query;
     let token = req.header('x-auth-token');
     let userdata = jwt.verify(token, JWT_KEY);
     const userMatch = await User.findAll({

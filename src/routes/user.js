@@ -331,15 +331,22 @@ router.get('/account', async function (req, res) {
                     }
                 }
             );
+
             if (dataUser.length === 0) {
                 return res.status(404).send({
                     message: "Data dengan username " + username + " tidak ditemukan!"
                 });
             }
             else {
-                return res.status(200).send({
-                    dataUser
-                });
+                if (username == null) {
+                    const dataAllUser = User.findAll();
+                    return res.status(200).send(dataAllUser);
+                }
+                else {
+                    return res.status(200).send({
+                        dataUser
+                    });
+                }
             }
         } else {
             return res.status(400).send({
@@ -351,42 +358,6 @@ router.get('/account', async function (req, res) {
     }
 });
 //GET ALL ACCOUNT
-router.get('/account', async function (req, res) {
-    let token = req.header('x-auth-token');
-    let userdata = jwt.verify(token, JWT_KEY);
-
-    if (!req.header('x-auth-token')) {
-        return res.status(400).send('Unauthorized')
-    }
-    try {
-        if (userdata.id_user == "ADMIN") {
-
-            const dataUser = await User.findAll(
-                {
-                    attributes: {
-                        exclude: ['password', 'status']
-                    }
-                }
-            );
-            if (dataUser.length === 0) {
-                return res.status(404).send({
-                    message: 'User tidak ditemukan'
-                });
-            }
-            else {
-                return res.status(200).send({
-                    dataUser
-                });
-            }
-        } else {
-            return res.status(400).send({
-                message: 'Bukan role Admin, tidak dapat menggunakan fitur'
-            });
-        }
-    } catch (error) {
-        return res.status(400).send('Invalid JWT Key');
-    }
-});
 //DELETE ACCOUNT
 router.delete('/delete/account', async function (req, res) {
     let { username } = req.query;
