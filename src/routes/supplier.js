@@ -49,6 +49,7 @@ router.post('/add/supplier', upload.single('logo'), async function (req, res) {
     try {
         await schema.validateAsync(req.body)
     } catch (error) {
+        fs.unlinkSync(`./assets/image/logo/${req.file.filename}`);
         return res.status(400).send(error.toString())
     }
     let token = req.header('x-auth-token');
@@ -102,6 +103,7 @@ router.post('/add/supplier', upload.single('logo'), async function (req, res) {
 
         }
         else {
+            fs.unlinkSync(`./assets/image/logo/${req.file.filename}`);
             return res.status(400).send({
                 message: 'Bukan role Staff, tidak dapat menggunakan fitur'
             });
@@ -177,6 +179,7 @@ router.put('/update/supplier', upload.single('logo'), async function (req, res) 
     try {
         await schema.validateAsync(req.body)
     } catch (error) {
+        fs.unlinkSync(`./assets/image/logo/${req.file.filename}`);
         return res.status(400).send(error.toString())
     }
     let token = req.header('x-auth-token');
@@ -217,6 +220,7 @@ router.put('/update/supplier', upload.single('logo'), async function (req, res) 
                 }
             });
             if (dataSupplier.length === 0) {
+                fs.unlinkSync(`./assets/image/logo/${req.file.filename}`);
                 return res.status(404).send({
                     "message": "Data supplier tidak ditemukan!",
                 });
