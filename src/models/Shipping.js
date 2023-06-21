@@ -13,11 +13,11 @@ Shipping.init(
             primaryKey: true,
             allowNull: false
         },
-        companyName: {
+        company_name: {
             type: DataTypes.STRING(255),
             allowNull: false
         },
-        feeShipping: {
+        fee_shippings: {
             type: DataTypes.INTEGER(11),
             allowNull: false
         },

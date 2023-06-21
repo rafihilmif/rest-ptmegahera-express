@@ -40,6 +40,10 @@ Orders.init(
             type: DataTypes.STRING(255),
             allowNull: false
         },
+        province: {
+            type: DataTypes.STRING(255),
+            allowNull: false
+        },
         zipCode: {
             type: DataTypes.STRING(255),
             allowNull: false
@@ -53,7 +57,7 @@ Orders.init(
             allowNull: false
         },
         note: {
-            type: DataTypes.TEXT(),
+            type: DataTypes.TEXT(255),
             allowNull: true
         }
         ,

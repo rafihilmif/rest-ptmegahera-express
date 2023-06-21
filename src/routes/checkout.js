@@ -11,7 +11,7 @@ const jwt = require("jsonwebtoken");
 const JWT_KEY = 'ptmegaheragunakarya';
 const midtransClient = require("midtrans-client");
 
-let coreClient = new midtransClient.Snap({
+let coreClient = new midtransClient.CoreApi({
     isProduction: false,
     serverKey: "SB-Mid-server-XxmjTZyiAUYtY8YrH2pH8FbJ",
     clientKey: "SB-Mid-client-F3IpcrwFPVfo0Wxp"
@@ -31,6 +31,7 @@ const checkShipping = async (courier) => {
         throw new Error("shipping not found!");
     }
 };
+//CHECKOUT ITEM FROM CART
 router.post('/checkout', async function (req, res) {
     let { name, courier, address, zipcode, city, province, phone, note } = req.body;
     const schema = Joi.object({
@@ -39,7 +40,9 @@ router.post('/checkout', async function (req, res) {
         address: Joi.string().required(),
         zipcode: Joi.string().required(),
         city: Joi.string().required(),
+        province: Joi.string().required(),
         phone: Joi.number().required(),
+        note: Joi.string().required()
     });
     try {
         await schema.validateAsync(req.body)
@@ -63,7 +66,6 @@ router.post('/checkout', async function (req, res) {
     if (!req.header('x-auth-token')) {
         return res.status(400).send('Unauthorized')
     }
-
     try {
         if (tempIdUser == "CST") {
             let newIdPrefix = "ORD"
@@ -154,7 +156,9 @@ router.post('/checkout', async function (req, res) {
         return res.status(400).send('Invalid JWT Key');
     }
 });
+//CHARGE ITEM FROM CART
 router.post('/charge', async function (req, res) {
+    let { payment_type } = req.body;
     let token = req.header('x-auth-token');
     let userdata = jwt.verify(token, JWT_KEY);
     const userMatch = await User.findAll({
@@ -165,16 +169,8 @@ router.post('/charge', async function (req, res) {
         }
     });
     let tempIdUser = null;
-    let tempEmailUser = null;
-    let tempFirstName = null;
-    let tempLastName = null;
-    let tempTelephone = null;
     userMatch.forEach(element => {
         tempIdUser = element.id_user;
-        tempEmailUser = element.email;
-        tempFirstName = element.firstName;
-        tempLastName = element.lastName;
-        tempTelephone = element.phone;
     });
     tempIdUser = tempIdUser.substr(0, 3);
     if (!req.header('x-auth-token')) {
@@ -186,6 +182,9 @@ router.post('/charge', async function (req, res) {
                 where: {
                     id_user: {
                         [Op.like]: userdata.id_user
+                    },
+                    status: {
+                        [Op.like]: "Waiting Confirmation"
                     }
                 }
             });
@@ -195,37 +194,96 @@ router.post('/charge', async function (req, res) {
                 idOrder = element.id_order;
                 amount = element.total;
             });
-            let parameter = {
-                "transaction_details": {
-                    "order_id": idOrder,
-                    "gross_amount": amount
-                },
-                "enabled_payments": ["bca_va", "bni_va", "bri_va", "gopay", "shopeepay"],
-                "calbacks": {
-
-                },
-                "customer_details": {
-                    "first_name": tempFirstName,
-                    "last_name": tempLastName,
-                    "email": tempEmailUser,
-                    "phone": tempTelephone
-                }
+            if (dataOrder.length === 0) {
+                return res.status(404).send("Data order salah!");
             }
-            coreClient.charge(parameter)
-                .then((chargeResponse) => {
-                    console.log('chargeResponse:', JSON.stringify(chargeResponse));
-                })
-                .catch((e) => {
-                    console.log('Error occured:', e.message);
-                });;
-
+            else {
+                let parameter = {
+                    "payment_type": "bank_transfer",
+                    "transaction_details": {
+                        "gross_amount": parseInt(amount),
+                        "order_id": idOrder,
+                    },
+                    "bank_transfer": {
+                        "bank": payment_type
+                    }
+                }
+                coreClient.charge(parameter)
+                    .then((chargeResponse) => {
+                        res.json(chargeResponse);
+                    })
+                    .catch((err) => {
+                        res.send(err.message);
+                    });
+            }
         }
         else {
             return res.status(400).send("Bukan role customer, tidak dapat menggunakan fitur!");
         }
-
     } catch (error) {
-
+        return res.status(400).send('Invalid JWT Key');
     }
+});
+//CHECK STATUS PAYMENT AND UPDATE ORDER
+router.get('/status', async function (req, res) {
+    let { order_id } = req.query;
+    let token = req.header('x-auth-token');
+    let userdata = jwt.verify(token, JWT_KEY);
+    const userMatch = await User.findAll({
+        where: {
+            id_user: {
+                [Op.like]: userdata.id_user
+            }
+        }
+    });
+    let tempIdUser = null;
+    userMatch.forEach(element => {
+        tempIdUser = element.id_user;
+    });
+    tempIdUser = tempIdUser.substr(0, 3);
+    if (!req.header('x-auth-token')) {
+        return res.status(400).send('Unauthorized')
+    }
+    try {
+        if (tempIdUser == "STF") {
+            const checkOrder = await Orders.findAll({
+                where: {
+                    id_order: {
+                        [Op.like]: order_id
+                    }
+                }
+            });
+            if (checkOrder.length === 0) {
+                return res.status(404).send("Data order tidak ditemukan");
+            }
+            else {
+                coreClient.transaction.status(order_id)
+                    .then((response) => {
+                        res.json(response);
+                        if (response.transaction_status == 'settlement') {
+                            const updateOrder = Orders.update(
+                                {
+                                    status: "Paid"
+                                }, {
+                                where: {
+                                    id_order: {
+                                        [Op.like]: order_id
+                                    }
+                                }
+                            });
+                        }
+                    }).catch((err) => {
+                        res.send(err.message)
+                    });
+            }
+
+        }
+        else {
+            return res.status(400).send("Bukan role staff, tidak dapat menggunakan fitur!");
+        }
+    } catch (error) {
+        return res.status(400).send('Invalid JWT Key');
+    }
+
 });
 module.exports = router;

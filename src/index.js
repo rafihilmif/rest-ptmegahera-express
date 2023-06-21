@@ -15,8 +15,6 @@ const Suppliers = require("./models/Suppliers");
 const Cart = require("./models/Cart");
 const Orders = require("./models/Orders");
 const Developer = require("./models/Developer");
-const History = require("./models/History");
-const Payment = require("./models/Payment");
 const Shipping = require("./models/Shipping");
 
 const app = express();
