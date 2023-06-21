@@ -1,0 +1,2837 @@
+{
+	"info": {
+		"_postman_id": "2491322d-65e3-47cd-9afb-0e87e728c380",
+		"name": "API PT Megahera",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28077811"
+	},
+	"item": [
+		{
+			"name": "STAFF V",
+			"item": [
+				{
+					"name": "Supplier V",
+					"item": [
+						{
+							"name": "ADD SUPPLIER",
+							"item": [
+								{
+									"name": "STATUS 201 V",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-auth-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiU1RGMDAxIiwiZW1haWwiOiJrdW50b3dpam9AcHRtZWdhaGVyYS5jb20iLCJmaXJzdE5hbWUiOiJLdW50byIsImxhc3ROYW1lIjoiV2lqb3lvIiwiYmlydGhkYXRlIjoiMTk5NS0xMi0wMyIsImFkZHJlc3MiOiJKYWxhbiBPbGFocmFnYSA1IE5vLiA3IiwiY2l0eSI6IlN1cmFiYXlhIiwicHJvdmluY2UiOiJKYXdhIFRpbXVyIiwicGhvbmUiOiIwODEzNTE1NTMyMSIsImlhdCI6MTY4NTI4NDkyOCwiZXhwIjoxNjg1Mjg2NzI4fQ._7UQYSWJ5M-8v0GEfmyDTBmurKNdggf-l-Xe0nS4tGc",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "name",
+													"value": "Kings Light",
+													"type": "text"
+												},
+												{
+													"key": "logo",
+													"type": "file",
+													"src": "/C:/Users/CYBORG 15 A12VE 074/Downloads/lampu212.jpg"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/add/supplier",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"add",
+												"supplier"
+											]
+										},
+										"description": "Endpoint ini dapat diakses oleh staff saja. Endpoint ini berfungsi sebagai menambahkan supplier / brand produk yang akan dijual."
+									},
+									"response": []
+								},
+								{
+									"name": "STATUS 400 V",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-auth-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiU1RGMDAxIiwiZW1haWwiOiJrdW50b3dpam9AcHRtZWdhaGVyYS5jb20iLCJmaXJzdE5hbWUiOiJLdW50byIsImxhc3ROYW1lIjoiV2lqb3lvIiwiYmlydGhkYXRlIjoiMTk5NS0xMi0wMyIsImFkZHJlc3MiOiJKYWxhbiBPbGFocmFnYSA1IE5vLiA3IiwiY2l0eSI6IlN1cmFiYXlhIiwicHJvdmluY2UiOiJKYXdhIFRpbXVyIiwicGhvbmUiOiIwODEzNTE1NTMyMSIsImlhdCI6MTY4NzI2MjM5NCwiZXhwIjoxNjg3MjY0MTk0fQ.WLIDTEvwrkN1XkCKLKboGS4SaJm1BiZ1pGo4S2urljg",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "name",
+													"value": "Hannochs",
+													"type": "text"
+												},
+												{
+													"key": "logo",
+													"type": "file",
+													"src": "/C:/Users/A/Pictures/Photo/Fujifilm/DSCF1486.JPG"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{host}}/api/add/supplier",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"api",
+												"add",
+												"supplier"
+											]
+										},
+										"description": "Endpoint ini dapat diakses oleh staff saja. Endpoint ini berfungsi sebagai menampilkan error terhadap inputan staff."
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "GET ALL SUPPLIER",
+							"item": [
+								{
+									"name": "STATUS 200 V",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-auth-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiU1RGMDAxIiwiZW1haWwiOiJrdW50b3dpam9AcHRtZWdhaGVyYS5jb20iLCJmaXJzdE5hbWUiOiJLdW50byIsImxhc3ROYW1lIjoiV2lqb3lvIiwiYmlydGhkYXRlIjoiMTk5NS0xMi0wMyIsImFkZHJlc3MiOiJKYWxhbiBPbGFocmFnYSA1IE5vLiA3IiwiY2l0eSI6IlN1cmFiYXlhIiwicHJvdmluY2UiOiJKYXdhIFRpbXVyIiwicGhvbmUiOiIwODEzNTE1NTMyMSIsImlhdCI6MTY4NzI2MjM5NCwiZXhwIjoxNjg3MjY0MTk0fQ.WLIDTEvwrkN1XkCKLKboGS4SaJm1BiZ1pGo4S2urljg",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:3000/api/supplier",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"supplier"
+											]
+										},
+										"description": "Endpoint ini dapat diakses oleh staff saja. Endpoint ini berfungsi sebagai menampilkan data supplier yang sudah terdaftar didalam database."
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "GET ALL SUPPLIER BY NAME",
+							"item": [
+								{
+									"name": "STATUS 200 V",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-auth-token",
+												"value": "",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "{{host}}/api/supplier?name=",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"api",
+												"supplier"
+											],
+											"query": [
+												{
+													"key": "name",
+													"value": ""
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "UPDATE SUPPLIER BY NAME",
+							"item": [
+								{
+									"name": "STATUS 200 V",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "x-auth-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiU1RGMDAxIiwiZW1haWwiOiJrdW50b3dpam9AcHRtZWdhaGVyYS5jb20iLCJmaXJzdE5hbWUiOiJLdW50byIsImxhc3ROYW1lIjoiV2lqb3lvIiwiYmlydGhkYXRlIjoiMTk5NS0xMi0wMyIsImFkZHJlc3MiOiJKYWxhbiBPbGFocmFnYSA1IE5vLiA3IiwiY2l0eSI6IlN1cmFiYXlhIiwicHJvdmluY2UiOiJKYXdhIFRpbXVyIiwicGhvbmUiOiIwODEzNTE1NTMyMSIsImlhdCI6MTY4NzI2MjgzMiwiZXhwIjoxNjg3MjY0NjMyfQ.pM5uDU1Jnr5wow3BTT5a7UJ3FJ9dSaaWmNEX3BHGfVc",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "newName",
+													"value": "Phillips",
+													"type": "text"
+												},
+												{
+													"key": "logo",
+													"type": "file",
+													"src": "/C:/Users/A/Pictures/Forbidden Tomb.png"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/update/supplier/Hannochs",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"update",
+												"supplier",
+												"Hannochs"
+											]
+										},
+										"description": "Endpoint ini dapat diakses oleh staff saja. Endpoint ini berfungsi sebagai mengubah data supplier yang sudah terdaftar didalam database."
+									},
+									"response": []
+								},
+								{
+									"name": "STATUS 400 V",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "x-auth-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiU1RGMDAxIiwiZW1haWwiOiJrdW50b3dpam9AcHRtZWdhaGVyYS5jb20iLCJmaXJzdE5hbWUiOiJLdW50byIsImxhc3ROYW1lIjoiV2lqb3lvIiwiYmlydGhkYXRlIjoiMTk5NS0xMi0wMyIsImFkZHJlc3MiOiJKYWxhbiBPbGFocmFnYSA1IE5vLiA3IiwiY2l0eSI6IlN1cmFiYXlhIiwicHJvdmluY2UiOiJKYXdhIFRpbXVyIiwicGhvbmUiOiIwODEzNTE1NTMyMSIsImlhdCI6MTY4NzI2Mzc1NiwiZXhwIjoxNjg3MjY1NTU2fQ.pcLsWJvjm4JR_WUDQwAiohGsctyrUo8nbPSKcVBJsk8",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "newName",
+													"value": "",
+													"type": "text"
+												},
+												{
+													"key": "logo",
+													"type": "file",
+													"src": "/C:/Users/CYBORG 15 A12VE 074/Downloads/lampu212.jpg"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/update/supplier/Meval2.0",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"update",
+												"supplier",
+												"Meval2.0"
+											]
+										},
+										"description": "Endpoint ini dapat diakses oleh staff saja. Endpoint ini berfungsi sebagai menampilkan kesalahan dalam memasukkan data supplier yang ingin diubah/diupdate."
+									},
+									"response": []
+								},
+								{
+									"name": "STATUS 404 V",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "x-auth-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiU1RGMDAxIiwiZW1haWwiOiJrdW50b3dpam9AcHRtZWdhaGVyYS5jb20iLCJmaXJzdE5hbWUiOiJLdW50byIsImxhc3ROYW1lIjoiV2lqb3lvIiwiYmlydGhkYXRlIjoiMTk5NS0xMi0wMyIsImFkZHJlc3MiOiJKYWxhbiBPbGFocmFnYSA1IE5vLiA3IiwiY2l0eSI6IlN1cmFiYXlhIiwicHJvdmluY2UiOiJKYXdhIFRpbXVyIiwicGhvbmUiOiIwODEzNTE1NTMyMSIsImlhdCI6MTY4NzI2Mzc1NiwiZXhwIjoxNjg3MjY1NTU2fQ.pcLsWJvjm4JR_WUDQwAiohGsctyrUo8nbPSKcVBJsk8",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "newName",
+													"value": "Phillips",
+													"type": "text"
+												},
+												{
+													"key": "logo",
+													"type": "file",
+													"src": "/C:/Users/A/Pictures/Forbidden Tomb.png"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/update/supplier/Meval2.0",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"update",
+												"supplier",
+												"Meval2.0"
+											]
+										},
+										"description": "Endpoint ini dapat diakses oleh staff saja. Endpoint ini berfungsi sebagai menampilkan pesan ketika data supplier yang diubah tidak ada / tidak terdaftar."
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "DELETE SUPPLIER BY NAME",
+							"item": [
+								{
+									"name": "STATUS 200 V",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "x-auth-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiU1RGMDAxIiwiZW1haWwiOiJrdW50b3dpam9AcHRtZWdhaGVyYS5jb20iLCJmaXJzdE5hbWUiOiJLdW50byIsImxhc3ROYW1lIjoiV2lqb3lvIiwiYmlydGhkYXRlIjoiMTk5NS0xMi0wMyIsImFkZHJlc3MiOiJKYWxhbiBPbGFocmFnYSA1IE5vLiA3IiwiY2l0eSI6IlN1cmFiYXlhIiwicHJvdmluY2UiOiJKYXdhIFRpbXVyIiwicGhvbmUiOiIwODEzNTE1NTMyMSIsImlhdCI6MTY4NzI2Mzc1NiwiZXhwIjoxNjg3MjY1NTU2fQ.pcLsWJvjm4JR_WUDQwAiohGsctyrUo8nbPSKcVBJsk8",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:3000/api/delete/supplier/:name",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"delete",
+												"supplier",
+												":name"
+											],
+											"variable": [
+												{
+													"key": "name",
+													"value": null
+												}
+											]
+										},
+										"description": "StartFragment\n\nEndpoint ini dapat diakses oleh staff saja. Endpoint ini berfungsi sebagai menghapus data supplier yang sudah terdaftar didalam database.\n\nEndFragment"
+									},
+									"response": []
+								},
+								{
+									"name": "STATUS 404 V",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "x-auth-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiU1RGMDAxIiwiZW1haWwiOiJrdW50b3dpam9AcHRtZWdhaGVyYS5jb20iLCJmaXJzdE5hbWUiOiJLdW50byIsImxhc3ROYW1lIjoiV2lqb3lvIiwiYmlydGhkYXRlIjoiMTk5NS0xMi0wMyIsImFkZHJlc3MiOiJKYWxhbiBPbGFocmFnYSA1IE5vLiA3IiwiY2l0eSI6IlN1cmFiYXlhIiwicHJvdmluY2UiOiJKYXdhIFRpbXVyIiwicGhvbmUiOiIwODEzNTE1NTMyMSIsImlhdCI6MTY4NzI2Mzc1NiwiZXhwIjoxNjg3MjY1NTU2fQ.pcLsWJvjm4JR_WUDQwAiohGsctyrUo8nbPSKcVBJsk8",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:3000/api/delete/supplier/:name",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"delete",
+												"supplier",
+												":name"
+											],
+											"variable": [
+												{
+													"key": "name",
+													"value": null
+												}
+											]
+										},
+										"description": "StartFragment\n\nEndpoint ini dapat diakses oleh staff saja. Endpoint ini berfungsi sebagai menampilkan pesan ketika data supplier yang ingih dihapus tidak ada / tidak terdaftar.\n\nEndFragment"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Product V",
+					"item": [
+						{
+							"name": "ADD PRODUCT",
+							"item": [
+								{
+									"name": "STATUS 201 V",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-auth-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiU1RGMDAxIiwiZW1haWwiOiJrdW50b3dpam9AcHRtZWdhaGVyYS5jb20iLCJmaXJzdE5hbWUiOiJLdW50byIsImxhc3ROYW1lIjoiV2lqb3lvIiwiYmlydGhkYXRlIjoiMTk5NS0xMi0wMyIsImFkZHJlc3MiOiJKYWxhbiBPbGFocmFnYSA1IE5vLiA3IiwiY2l0eSI6IlN1cmFiYXlhIiwicHJvdmluY2UiOiJKYXdhIFRpbXVyIiwicGhvbmUiOiIwODEzNTE1NTMyMSIsImlhdCI6MTY4NzMxNzExOSwiZXhwIjoxNjg3MzE4OTE5fQ.J6rbQQWRk2Wq1KNnsdJxKBQ2PIAwQ8mWcyTX6ZX9tC8",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "name",
+													"value": "LED PACKAGE LITE",
+													"type": "text"
+												},
+												{
+													"key": "description",
+													"value": "Garansi 3 Tahun",
+													"type": "text"
+												},
+												{
+													"key": "price",
+													"value": "300000",
+													"type": "text"
+												},
+												{
+													"key": "quantity",
+													"value": "10",
+													"type": "text"
+												},
+												{
+													"key": "brand",
+													"value": "Hannochs",
+													"type": "text"
+												},
+												{
+													"key": "category",
+													"value": "LED",
+													"type": "text"
+												},
+												{
+													"key": "picture",
+													"type": "file",
+													"src": "/C:/Users/CYBORG 15 A12VE 074/Downloads/lampu212.jpg"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/add/product",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"add",
+												"product"
+											]
+										},
+										"description": "StartFragment\n\nEndpoint ini dapat diakses oleh staff saja. Endpoint ini berfungsi untuk menambahkan produk baru.\n\nEndFragment"
+									},
+									"response": []
+								},
+								{
+									"name": "STATUS 400 V",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-auth-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiU1RGMDAxIiwiZW1haWwiOiJrdW50b3dpam9AcHRtZWdhaGVyYS5jb20iLCJmaXJzdE5hbWUiOiJLdW50byIsImxhc3ROYW1lIjoiV2lqb3lvIiwiYmlydGhkYXRlIjoiMTk5NS0xMi0wMyIsImFkZHJlc3MiOiJKYWxhbiBPbGFocmFnYSA1IE5vLiA3IiwiY2l0eSI6IlN1cmFiYXlhIiwicHJvdmluY2UiOiJKYXdhIFRpbXVyIiwicGhvbmUiOiIwODEzNTE1NTMyMSIsImlhdCI6MTY4NzMxNzExOSwiZXhwIjoxNjg3MzE4OTE5fQ.J6rbQQWRk2Wq1KNnsdJxKBQ2PIAwQ8mWcyTX6ZX9tC8",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "name",
+													"value": "LED PACKAGE LITE",
+													"type": "text"
+												},
+												{
+													"key": "description",
+													"value": "Garansi 3 Tahun",
+													"type": "text"
+												},
+												{
+													"key": "price",
+													"value": "300000",
+													"type": "text"
+												},
+												{
+													"key": "quantity",
+													"value": "10",
+													"type": "text"
+												},
+												{
+													"key": "brand",
+													"value": "Hannochs",
+													"type": "text"
+												},
+												{
+													"key": "category",
+													"value": "LED",
+													"type": "text"
+												},
+												{
+													"key": "picture",
+													"type": "file",
+													"src": "/C:/Users/CYBORG 15 A12VE 074/Downloads/lampu212.jpg"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/add/product",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"add",
+												"product"
+											]
+										},
+										"description": "Endpoint ini dapat diakses oleh staff saja. Endpoint ini berfungsi untuk menampilkan pesan eror ketika data inputan ketika sedang menambahkan produk baru.\n\nEndFragmen"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "GET ALL PRODUCT",
+							"item": [
+								{
+									"name": "STATUS 200 V",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-auth-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiU1RGMDAxIiwiZW1haWwiOiJrdW50b3dpam9AcHRtZWdhaGVyYS5jb20iLCJmaXJzdE5hbWUiOiJLdW50byIsImxhc3ROYW1lIjoiV2lqb3lvIiwiYmlydGhkYXRlIjoiMTk5NS0xMi0wMyIsImFkZHJlc3MiOiJKYWxhbiBPbGFocmFnYSA1IE5vLiA3IiwiY2l0eSI6IlN1cmFiYXlhIiwicHJvdmluY2UiOiJKYXdhIFRpbXVyIiwicGhvbmUiOiIwODEzNTE1NTMyMSIsImlhdCI6MTY4NzI2MTYwMiwiZXhwIjoxNjg3MjYzNDAyfQ.cqJZAm9H98DAoMpSGnIO44EBdI02ZNfqLc3BuRSDvUI",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": []
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/product",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"product"
+											]
+										},
+										"description": "Endpoint ini dapat diakses oleh staff saja. Endpoint ini berfungsi untuk menampilkan semua produk yang tersedia dan terdaftar didalam sistem.\n\nEndFragmen"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "GET PRODUCT BY NAME",
+							"item": [
+								{
+									"name": "STATUS 200 V",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-auth-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiU1RGMDAxIiwiZW1haWwiOiJrdW50b3dpam9AcHRtZWdhaGVyYS5jb20iLCJmaXJzdE5hbWUiOiJLdW50byIsImxhc3ROYW1lIjoiV2lqb3lvIiwiYmlydGhkYXRlIjoiMTk5NS0xMi0wMyIsImFkZHJlc3MiOiJKYWxhbiBPbGFocmFnYSA1IE5vLiA3IiwiY2l0eSI6IlN1cmFiYXlhIiwicHJvdmluY2UiOiJKYXdhIFRpbXVyIiwicGhvbmUiOiIwODEzNTE1NTMyMSIsImlhdCI6MTY4NzI2MTYwMiwiZXhwIjoxNjg3MjYzNDAyfQ.cqJZAm9H98DAoMpSGnIO44EBdI02ZNfqLc3BuRSDvUI",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:3000/api/product/?name=LA",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"product",
+												""
+											],
+											"query": [
+												{
+													"key": "name",
+													"value": "LA"
+												}
+											]
+										},
+										"description": "Endpoint ini dapat diakses oleh staff saja. Endpoint ini berfungsi untuk menampilkan produk berdasarkan nama produk.\n\nEndFragmen"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "GET PRODUCT BY PRICE",
+							"item": [
+								{
+									"name": "STATUS 200 V",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-auth-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiU1RGMDAxIiwiZW1haWwiOiJrdW50b3dpam9AcHRtZWdhaGVyYS5jb20iLCJmaXJzdE5hbWUiOiJLdW50byIsImxhc3ROYW1lIjoiV2lqb3lvIiwiYmlydGhkYXRlIjoiMTk5NS0xMi0wMyIsImFkZHJlc3MiOiJKYWxhbiBPbGFocmFnYSA1IE5vLiA3IiwiY2l0eSI6IlN1cmFiYXlhIiwicHJvdmluY2UiOiJKYXdhIFRpbXVyIiwicGhvbmUiOiIwODEzNTE1NTMyMSIsImlhdCI6MTY4NzI2MTk4MywiZXhwIjoxNjg3MjYzNzgzfQ.Qqgk80b_MXGZTOR4l1J61rx1vjc87_sc_GFkWOtkUQ0",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:3000/api/product/?minPrice=13&maxPrice=14",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"product",
+												""
+											],
+											"query": [
+												{
+													"key": "name",
+													"value": "o",
+													"disabled": true
+												},
+												{
+													"key": "minPrice",
+													"value": "13"
+												},
+												{
+													"key": "maxPrice",
+													"value": "14"
+												}
+											]
+										},
+										"description": "StartFragment\n\nEndpoint ini dapat diakses oleh staff saja. Endpoint ini berfungsi untuk menampilkan produk berdasarkan harga produk.\n\nEndFragment"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "UPDATE PRODUCT BY NAME",
+							"item": [
+								{
+									"name": "STATUS 200 V",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "x-auth-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiU1RGMDAxIiwiZW1haWwiOiJrdW50b3dpam9AcHRtZWdhaGVyYS5jb20iLCJmaXJzdE5hbWUiOiJLdW50byIsImxhc3ROYW1lIjoiV2lqb3lvIiwiYmlydGhkYXRlIjoiMTk5NS0xMi0wMyIsImFkZHJlc3MiOiJKYWxhbiBPbGFocmFnYSA1IE5vLiA3IiwiY2l0eSI6IlN1cmFiYXlhIiwicHJvdmluY2UiOiJKYXdhIFRpbXVyIiwicGhvbmUiOiIwODEzNTE1NTMyMSIsImlhdCI6MTY4NzMzMzA1MiwiZXhwIjoxNjg3MzM0ODUyfQ.NdmhnH1IBHMOACSquMAQV0Unkg_T_btU448qD9E8vho",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "newName",
+													"value": "Kabel Olor Khusus 2 Meter",
+													"type": "text"
+												},
+												{
+													"key": "description",
+													"value": "4 Meter Garansi 10 Tahun",
+													"type": "text"
+												},
+												{
+													"key": "price",
+													"value": "92000",
+													"type": "text"
+												},
+												{
+													"key": "quantity",
+													"value": "20",
+													"type": "text"
+												},
+												{
+													"key": "brand",
+													"value": "Indomaret",
+													"type": "text"
+												},
+												{
+													"key": "category",
+													"value": "LED",
+													"type": "text"
+												},
+												{
+													"key": "picture",
+													"type": "file",
+													"src": "/C:/Users/CYBORG 15 A12VE 074/Downloads/3efdac3b-efea-4201-8db2-4c1a997f1716.jpg"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/update/product?name=bakso",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"update",
+												"product"
+											],
+											"query": [
+												{
+													"key": "name",
+													"value": "bakso"
+												}
+											]
+										},
+										"description": "StartFragment\n\nEndpoint ini dapat diakses oleh staff saja. Endpoint ini berfungsi untuk mengubah produk berdasarkan nama produk.\n\nEndFragmen"
+									},
+									"response": []
+								},
+								{
+									"name": "STATUS 404 V",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "x-auth-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiU1RGMDAxIiwiZW1haWwiOiJrdW50b3dpam9AcHRtZWdhaGVyYS5jb20iLCJmaXJzdE5hbWUiOiJLdW50byIsImxhc3ROYW1lIjoiV2lqb3lvIiwiYmlydGhkYXRlIjoiMTk5NS0xMi0wMyIsImFkZHJlc3MiOiJKYWxhbiBPbGFocmFnYSA1IE5vLiA3IiwiY2l0eSI6IlN1cmFiYXlhIiwicHJvdmluY2UiOiJKYXdhIFRpbXVyIiwicGhvbmUiOiIwODEzNTE1NTMyMSIsImlhdCI6MTY4NzMzMzA1MiwiZXhwIjoxNjg3MzM0ODUyfQ.NdmhnH1IBHMOACSquMAQV0Unkg_T_btU448qD9E8vho",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "newName",
+													"value": "Kabel Olor Khusus 2 Meter",
+													"type": "text"
+												},
+												{
+													"key": "description",
+													"value": "4 Meter Garansi 10 Tahun",
+													"type": "text"
+												},
+												{
+													"key": "price",
+													"value": "92000",
+													"type": "text"
+												},
+												{
+													"key": "quantity",
+													"value": "20",
+													"type": "text"
+												},
+												{
+													"key": "brand",
+													"value": "Indomaret",
+													"type": "text"
+												},
+												{
+													"key": "category",
+													"value": "LED",
+													"type": "text"
+												},
+												{
+													"key": "picture",
+													"type": "file",
+													"src": "/C:/Users/CYBORG 15 A12VE 074/Downloads/3efdac3b-efea-4201-8db2-4c1a997f1716.jpg"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/update/product?name=bakso",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"update",
+												"product"
+											],
+											"query": [
+												{
+													"key": "name",
+													"value": "bakso"
+												}
+											]
+										},
+										"description": "StartFragment\n\nEndpoint ini dapat diakses oleh staff saja. Endpoint ini berfungsi untuk menampilkan pesan eror ketika nama produk tidak dapat ditemukan ketika ingin mengubah data produk yang tersimpan didalam database.\n\nEndFragment"
+									},
+									"response": []
+								},
+								{
+									"name": "STATUS 400 V",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "x-auth-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiU1RGMDAxIiwiZW1haWwiOiJrdW50b3dpam9AcHRtZWdhaGVyYS5jb20iLCJmaXJzdE5hbWUiOiJLdW50byIsImxhc3ROYW1lIjoiV2lqb3lvIiwiYmlydGhkYXRlIjoiMTk5NS0xMi0wMyIsImFkZHJlc3MiOiJKYWxhbiBPbGFocmFnYSA1IE5vLiA3IiwiY2l0eSI6IlN1cmFiYXlhIiwicHJvdmluY2UiOiJKYXdhIFRpbXVyIiwicGhvbmUiOiIwODEzNTE1NTMyMSIsImlhdCI6MTY4NzMxOTQ5NCwiZXhwIjoxNjg3MzIxMjk0fQ.XrmLkJy8GTjwQFxF2WYhXBRTuvLy8dYAzqUqlZVcW2E",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "newName",
+													"value": "Kabel Olor Khusus 2 Meter",
+													"type": "text"
+												},
+												{
+													"key": "description",
+													"value": "4 Meter Garansi 10 Tahun",
+													"type": "text"
+												},
+												{
+													"key": "price",
+													"value": "92000",
+													"type": "text"
+												},
+												{
+													"key": "quantity",
+													"value": "20",
+													"type": "text"
+												},
+												{
+													"key": "brand",
+													"value": "Indomaret",
+													"type": "text"
+												},
+												{
+													"key": "category",
+													"value": "LED",
+													"type": "text"
+												},
+												{
+													"key": "picture",
+													"type": "file",
+													"src": "/C:/Users/CYBORG 15 A12VE 074/Downloads/3efdac3b-efea-4201-8db2-4c1a997f1716.jpg"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/update/product?=Perabotan Listrik",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"update",
+												"product"
+											],
+											"query": [
+												{
+													"key": "",
+													"value": "Perabotan Listrik"
+												}
+											]
+										},
+										"description": "Endpoint ini dapat diakses oleh staff saja. Endpoint ini berfungsi untuk menampilkan pesan eror ketika data inputan data tidak sesuai dengan ketentuan form saat ingin mengubah data."
+									},
+									"response": []
+								}
+							],
+							"description": "StartFragment\n\nEndpoint ini dapat diakses oleh staff saja. Endpoint ini berfungsi untuk mengubah produk berdasarkan nama produk.\n\nEndFragmen"
+						},
+						{
+							"name": "DELETE PRODUCT BY NAME",
+							"item": [
+								{
+									"name": "STATUS 200 V",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "x-auth-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiU1RGMDAxIiwiZW1haWwiOiJrdW50b3dpam9AcHRtZWdhaGVyYS5jb20iLCJmaXJzdE5hbWUiOiJLdW50byIsImxhc3ROYW1lIjoiV2lqb3lvIiwiYmlydGhkYXRlIjoiMTk5NS0xMi0wMyIsImFkZHJlc3MiOiJKYWxhbiBPbGFocmFnYSA1IE5vLiA3IiwiY2l0eSI6IlN1cmFiYXlhIiwicHJvdmluY2UiOiJKYXdhIFRpbXVyIiwicGhvbmUiOiIwODEzNTE1NTMyMSIsImlhdCI6MTY4NzMxODA3MiwiZXhwIjoxNjg3MzE5ODcyfQ.gLE1iijOhMGgwfrLW_Lmej7UwUPs_xRtSrMdbHtxnzk",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:3000/api/delete/product/:name",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"delete",
+												"product",
+												":name"
+											],
+											"variable": [
+												{
+													"key": "name",
+													"value": null
+												}
+											]
+										},
+										"description": "Endpoint ini dapat diakses oleh staff saja. Endpoint ini berfungsi untuk menghapus produk sesuai dengan nama produknya."
+									},
+									"response": []
+								},
+								{
+									"name": "STATUS 404 V",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "x-auth-token",
+												"value": "",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{host}}/api/delete/product/:name",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"api",
+												"delete",
+												"product",
+												":name"
+											],
+											"variable": [
+												{
+													"key": "name",
+													"value": null
+												}
+											]
+										},
+										"description": "Endpoint ini dapat diakses oleh staff saja. Endpoint ini berfungsi untuk menampilkan pesan eror ketika produk yang ingin dihapus tidak detemukan atau tidak terdaftar didalam database."
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Category V",
+					"item": [
+						{
+							"name": "ADD CATEGORY",
+							"item": [
+								{
+									"name": "STATUS 201 V",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-auth-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiU1RGMDAxIiwiZW1haWwiOiJrdW50b3dpam9AcHRtZWdhaGVyYS5jb20iLCJmaXJzdE5hbWUiOiJLdW50byIsImxhc3ROYW1lIjoiV2lqb3lvIiwiYmlydGhkYXRlIjoiMTk5NS0xMi0wMyIsImFkZHJlc3MiOiJKYWxhbiBPbGFocmFnYSA1IE5vLiA3IiwiY2l0eSI6IlN1cmFiYXlhIiwicHJvdmluY2UiOiJKYXdhIFRpbXVyIiwicGhvbmUiOiIwODEzNTE1NTMyMSIsImlhdCI6MTY4NzI2Mzc1NiwiZXhwIjoxNjg3MjY1NTU2fQ.pcLsWJvjm4JR_WUDQwAiohGsctyrUo8nbPSKcVBJsk8",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "name",
+													"value": "Stopkontak",
+													"type": "text"
+												},
+												{
+													"key": "description",
+													"value": "5 Lubang",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/add/category",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"add",
+												"category"
+											]
+										},
+										"description": "Endpoint ini dapat diakses oleh staff saja. Endpoint ini berfungsi untuk menambahkan kategori produk."
+									},
+									"response": []
+								},
+								{
+									"name": "STATUS 400 V",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-auth-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiU1RGMDAxIiwiZW1haWwiOiJrdW50b3dpam9AcHRtZWdhaGVyYS5jb20iLCJmaXJzdE5hbWUiOiJLdW50byIsImxhc3ROYW1lIjoiV2lqb3lvIiwiYmlydGhkYXRlIjoiMTk5NS0xMi0wMyIsImFkZHJlc3MiOiJKYWxhbiBPbGFocmFnYSA1IE5vLiA3IiwiY2l0eSI6IlN1cmFiYXlhIiwicHJvdmluY2UiOiJKYXdhIFRpbXVyIiwicGhvbmUiOiIwODEzNTE1NTMyMSIsImlhdCI6MTY4NzI2Mzc1NiwiZXhwIjoxNjg3MjY1NTU2fQ.pcLsWJvjm4JR_WUDQwAiohGsctyrUo8nbPSKcVBJsk8",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "name",
+													"value": "",
+													"type": "text"
+												},
+												{
+													"key": "description",
+													"value": "as",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/add/category",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"add",
+												"category"
+											]
+										},
+										"description": "Endpoint ini dapat diakses oleh staff saja. Endpoint ini berfungsi untuk menampilkan pesan eror ketika terdapat kesalahan dalam menginput data ketika sedang menambahkan kategori produk."
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "GET ALL CATEGORY",
+							"item": [
+								{
+									"name": "STATUS 200 V",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-auth-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiU1RGMDAxIiwiZW1haWwiOiJrdW50b3dpam9AcHRtZWdhaGVyYS5jb20iLCJmaXJzdE5hbWUiOiJLdW50byIsImxhc3ROYW1lIjoiV2lqb3lvIiwiYmlydGhkYXRlIjoiMTk5NS0xMi0wMyIsImFkZHJlc3MiOiJKYWxhbiBPbGFocmFnYSA1IE5vLiA3IiwiY2l0eSI6IlN1cmFiYXlhIiwicHJvdmluY2UiOiJKYXdhIFRpbXVyIiwicGhvbmUiOiIwODEzNTE1NTMyMSIsImlhdCI6MTY4NTI1ODY4MCwiZXhwIjoxNjg1MjYwNDgwfQ.yXxVAMRIQfKykrkCPWjZNbRaocOTqBormTQFiQ54LH0",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:3000/api/category",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"category"
+											]
+										},
+										"description": "Endpoint ini dapat diakses oleh staff saja. Endpoint ini berfungsi untuk menampilkan semua kategori produk yang tedaftar didalam database."
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "GET CATEGORY BY NAME",
+							"item": [
+								{
+									"name": "STATUS 200 V",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-auth-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiU1RGMDAxIiwiZW1haWwiOiJrdW50b3dpam9AcHRtZWdhaGVyYS5jb20iLCJmaXJzdE5hbWUiOiJLdW50byIsImxhc3ROYW1lIjoiV2lqb3lvIiwiYmlydGhkYXRlIjoiMTk5NS0xMi0wMyIsImFkZHJlc3MiOiJKYWxhbiBPbGFocmFnYSA1IE5vLiA3IiwiY2l0eSI6IlN1cmFiYXlhIiwicHJvdmluY2UiOiJKYXdhIFRpbXVyIiwicGhvbmUiOiIwODEzNTE1NTMyMSIsImlhdCI6MTY4NzI2NDM0OCwiZXhwIjoxNjg3MjY2MTQ4fQ.tbkdRdHI76d1Fps1JjtTy0Sq7OKNWWu6sdqrlQq1rC8",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:3000/api/category/?name=lampu",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"category",
+												""
+											],
+											"query": [
+												{
+													"key": "name",
+													"value": "lampu"
+												}
+											]
+										},
+										"description": "Endpoint ini dapat diakses oleh staff saja. Endpoint ini berfungsi untuk kategori produk berdasarkan nama produk yang terdaftar."
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "UPDATE CATEGORY",
+							"item": [
+								{
+									"name": "STATUS 200 V",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "x-auth-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiU1RGMDAxIiwiZW1haWwiOiJrdW50b3dpam9AcHRtZWdhaGVyYS5jb20iLCJmaXJzdE5hbWUiOiJLdW50byIsImxhc3ROYW1lIjoiV2lqb3lvIiwiYmlydGhkYXRlIjoiMTk5NS0xMi0wMyIsImFkZHJlc3MiOiJKYWxhbiBPbGFocmFnYSA1IE5vLiA3IiwiY2l0eSI6IlN1cmFiYXlhIiwicHJvdmluY2UiOiJKYXdhIFRpbXVyIiwicGhvbmUiOiIwODEzNTE1NTMyMSIsImlhdCI6MTY4NzI2NDM0OCwiZXhwIjoxNjg3MjY2MTQ4fQ.tbkdRdHI76d1Fps1JjtTy0Sq7OKNWWu6sdqrlQq1rC8",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "new_name",
+													"value": "gds",
+													"type": "text"
+												},
+												{
+													"key": "description",
+													"value": "123",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/update/category/:name",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"update",
+												"category",
+												":name"
+											],
+											"variable": [
+												{
+													"key": "name",
+													"value": "lampu"
+												}
+											]
+										},
+										"description": "Endpoint ini dapat diakses oleh staff saja. Endpoint ini berfungsi untuk mengubah data kategori produk berdasarkan nama kategori yang terdaftar."
+									},
+									"response": []
+								},
+								{
+									"name": "STATUS 400 V",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "x-auth-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiU1RGMDAxIiwiZW1haWwiOiJrdW50b3dpam9AcHRtZWdhaGVyYS5jb20iLCJmaXJzdE5hbWUiOiJLdW50byIsImxhc3ROYW1lIjoiV2lqb3lvIiwiYmlydGhkYXRlIjoiMTk5NS0xMi0wMyIsImFkZHJlc3MiOiJKYWxhbiBPbGFocmFnYSA1IE5vLiA3IiwiY2l0eSI6IlN1cmFiYXlhIiwicHJvdmluY2UiOiJKYXdhIFRpbXVyIiwicGhvbmUiOiIwODEzNTE1NTMyMSIsImlhdCI6MTY4NzI2NDM0OCwiZXhwIjoxNjg3MjY2MTQ4fQ.tbkdRdHI76d1Fps1JjtTy0Sq7OKNWWu6sdqrlQq1rC8",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "new_name",
+													"value": "",
+													"type": "text"
+												},
+												{
+													"key": "description",
+													"value": "123",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/update/category/:name",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"update",
+												"category",
+												":name"
+											],
+											"variable": [
+												{
+													"key": "name",
+													"value": null
+												}
+											]
+										},
+										"description": "Endpoint ini dapat diakses oleh staff saja. Endpoint ini berfungsi untuk menampilkan pesan error ketika staff terdapat melakukan kesalah dalam melakukan input data yang ingin diubah dari kategori produk."
+									},
+									"response": []
+								},
+								{
+									"name": "STATUS 404 V",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "x-auth-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiU1RGMDAxIiwiZW1haWwiOiJrdW50b3dpam9AcHRtZWdhaGVyYS5jb20iLCJmaXJzdE5hbWUiOiJLdW50byIsImxhc3ROYW1lIjoiV2lqb3lvIiwiYmlydGhkYXRlIjoiMTk5NS0xMi0wMyIsImFkZHJlc3MiOiJKYWxhbiBPbGFocmFnYSA1IE5vLiA3IiwiY2l0eSI6IlN1cmFiYXlhIiwicHJvdmluY2UiOiJKYXdhIFRpbXVyIiwicGhvbmUiOiIwODEzNTE1NTMyMSIsImlhdCI6MTY4NzI2NDM0OCwiZXhwIjoxNjg3MjY2MTQ4fQ.tbkdRdHI76d1Fps1JjtTy0Sq7OKNWWu6sdqrlQq1rC8",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "new_name",
+													"value": "gds",
+													"type": "text"
+												},
+												{
+													"key": "description",
+													"value": "123",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/update/category/:name",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"update",
+												"category",
+												":name"
+											],
+											"variable": [
+												{
+													"key": "name",
+													"value": null
+												}
+											]
+										},
+										"description": "Endpoint ini dapat diakses oleh staff saja. Endpoint ini berfungsi untuk menampilkan pesan eror ketika nama kategori tidak ditemukan atau tidak terdaftar didalam database."
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "DELETE CATEGORY",
+							"item": [
+								{
+									"name": "STATUS 200",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "x-auth-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiU1RGMDAxIiwiZW1haWwiOiJrdW50b3dpam9AcHRtZWdhaGVyYS5jb20iLCJmaXJzdE5hbWUiOiJLdW50byIsImxhc3ROYW1lIjoiV2lqb3lvIiwiYmlydGhkYXRlIjoiMTk5NS0xMi0wMyIsImFkZHJlc3MiOiJKYWxhbiBPbGFocmFnYSA1IE5vLiA3IiwiY2l0eSI6IlN1cmFiYXlhIiwicHJvdmluY2UiOiJKYXdhIFRpbXVyIiwicGhvbmUiOiIwODEzNTE1NTMyMSIsImlhdCI6MTY4NTI4MjUwMCwiZXhwIjoxNjg1Mjg0MzAwfQ.i-RT0typzonWHhrEvpTsd-Y0Jty5upc8ORwqGQaID38",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:3000/api/delete/category/sdaf",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"delete",
+												"category",
+												"sdaf"
+											]
+										},
+										"description": "Endpoint ini dapat diakses oleh staff saja. Endpoint ini berfungsi untuk menghapus kategori produk berdasarkan nama kategori."
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "ADMIN",
+			"item": [
+				{
+					"name": "ADD ACCOUNT STAFF V",
+					"item": [
+						{
+							"name": "STATUS 200",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQURNSU4iLCJlbWFpbCI6ImFkbWluQHB0bWVnYWhlcmEuY29tIiwiZmlyc3ROYW1lIjpudWxsLCJsYXN0TmFtZSI6bnVsbCwiYmlydGhkYXRlIjpudWxsLCJhZGRyZXNzIjpudWxsLCJjaXR5IjpudWxsLCJwcm92aW5jZSI6bnVsbCwicGhvbmUiOm51bGwsImlhdCI6MTY4NDc3MTc0MSwiZXhwIjoxNjg0NzczNTQxfQ.9DQLHeVUJuSGs-4vtnLKIwhwvSA26AVw-A2A_k7nU8U",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "firstName",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "lastName",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "birthdate",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "city",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "province",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/add/account/staff",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"add",
+										"account",
+										"staff"
+									]
+								},
+								"description": "Endpoint ini dapat diakses oleh admin saja. Endpoint ini berfungsi untuk menambahkan data staff."
+							},
+							"response": []
+						},
+						{
+							"name": "STATUS 400",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQURNSU4iLCJlbWFpbCI6ImFkbWluQHB0bWVnYWhlcmEuY29tIiwiZmlyc3ROYW1lIjpudWxsLCJsYXN0TmFtZSI6bnVsbCwiYmlydGhkYXRlIjpudWxsLCJhZGRyZXNzIjpudWxsLCJjaXR5IjpudWxsLCJwcm92aW5jZSI6bnVsbCwicGhvbmUiOm51bGwsImlhdCI6MTY4NDc3MTc0MSwiZXhwIjoxNjg0NzczNTQxfQ.9DQLHeVUJuSGs-4vtnLKIwhwvSA26AVw-A2A_k7nU8U",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "firstName",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "lastName",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "birthdate",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "city",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "province",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/add/account/staff",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"add",
+										"account",
+										"staff"
+									]
+								},
+								"description": "Endpoint ini dapat diakses oleh admin saja. Endpoint ini berfungsi untuk menampilkan pesan eror ketika admin melakukan kesalahan dalam mengisi form penambahan akun."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "UPDATE ACCOUNT V",
+					"item": [
+						{
+							"name": "STATUS 200 V",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQURNSU4iLCJlbWFpbCI6ImFkbWluQHB0bWVnYWhlcmEuY29tIiwiZmlyc3ROYW1lIjpudWxsLCJsYXN0TmFtZSI6bnVsbCwiYmlydGhkYXRlIjpudWxsLCJhZGRyZXNzIjpudWxsLCJjaXR5IjpudWxsLCJwcm92aW5jZSI6bnVsbCwicGhvbmUiOm51bGwsImlhdCI6MTY4NzM0NzA0OCwiZXhwIjoxNjg3MzQ4ODQ4fQ.12be8dGOrjaONiX_CPi9IBLXe1mQGeWNZ87nk_Q_rFs",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "password",
+											"value": "123",
+											"type": "text"
+										},
+										{
+											"key": "firstName",
+											"value": "Kunto",
+											"type": "text"
+										},
+										{
+											"key": "lastName",
+											"value": "Wijoyo",
+											"type": "text"
+										},
+										{
+											"key": "birthdate",
+											"value": "12/03/1995",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "Jalan Olahraga 5 No. 7",
+											"type": "text"
+										},
+										{
+											"key": "city",
+											"value": "Surabaya",
+											"type": "text"
+										},
+										{
+											"key": "province",
+											"value": "Jawa Timur",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "08135155321",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/update/account?username=bakso",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"update",
+										"account"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "bakso"
+										}
+									]
+								},
+								"description": "Endpoint ini dapat diakses oleh admin saja. Endpoint ini berfungsi untuk mengubah data staff berdasarkan username user yang terdaftar."
+							},
+							"response": []
+						},
+						{
+							"name": "STATUS 400 V",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQURNSU4iLCJlbWFpbCI6ImFkbWluQHB0bWVnYWhlcmEuY29tIiwiZmlyc3ROYW1lIjpudWxsLCJsYXN0TmFtZSI6bnVsbCwiYmlydGhkYXRlIjpudWxsLCJhZGRyZXNzIjpudWxsLCJjaXR5IjpudWxsLCJwcm92aW5jZSI6bnVsbCwicGhvbmUiOm51bGwsImlhdCI6MTY4NzM0NzA0OCwiZXhwIjoxNjg3MzQ4ODQ4fQ.12be8dGOrjaONiX_CPi9IBLXe1mQGeWNZ87nk_Q_rFs",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "password",
+											"value": "123",
+											"type": "text"
+										},
+										{
+											"key": "firstName",
+											"value": "Kunto",
+											"type": "text"
+										},
+										{
+											"key": "lastName",
+											"value": "Wijoyo",
+											"type": "text"
+										},
+										{
+											"key": "birthdate",
+											"value": "12/03/1995",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "Jalan Olahraga 5 No. 7",
+											"type": "text"
+										},
+										{
+											"key": "city",
+											"value": "Surabaya",
+											"type": "text"
+										},
+										{
+											"key": "province",
+											"value": "Jawa Timur",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "08135155321",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/update/account?username=bakso",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"update",
+										"account"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "bakso"
+										}
+									]
+								},
+								"description": "Endpoint ini dapat diakses oleh admin saja. Endpoint ini berfungsi untuk menampilkan pesan eror ketika admin terdapat melakukan kesalahan dalam mengisi form update data account."
+							},
+							"response": []
+						},
+						{
+							"name": "STATUS 404 V",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQURNSU4iLCJlbWFpbCI6ImFkbWluQHB0bWVnYWhlcmEuY29tIiwiZmlyc3ROYW1lIjpudWxsLCJsYXN0TmFtZSI6bnVsbCwiYmlydGhkYXRlIjpudWxsLCJhZGRyZXNzIjpudWxsLCJjaXR5IjpudWxsLCJwcm92aW5jZSI6bnVsbCwicGhvbmUiOm51bGwsImlhdCI6MTY4NzM0NzA0OCwiZXhwIjoxNjg3MzQ4ODQ4fQ.12be8dGOrjaONiX_CPi9IBLXe1mQGeWNZ87nk_Q_rFs",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "password",
+											"value": "123",
+											"type": "text"
+										},
+										{
+											"key": "firstName",
+											"value": "Kunto",
+											"type": "text"
+										},
+										{
+											"key": "lastName",
+											"value": "Wijoyo",
+											"type": "text"
+										},
+										{
+											"key": "birthdate",
+											"value": "12/03/1995",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "Jalan Olahraga 5 No. 7",
+											"type": "text"
+										},
+										{
+											"key": "city",
+											"value": "Surabaya",
+											"type": "text"
+										},
+										{
+											"key": "province",
+											"value": "Jawa Timur",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "08135155321",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/update/account?username=bakso",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"update",
+										"account"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "bakso"
+										}
+									]
+								},
+								"description": "Endpoint ini dapat diakses oleh admin saja. Endpoint ini berfungsi untuk menampilkan pesan eror ketika nama username tidak ditemukan atau tidak terdaftar didalam database."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET DATA ACCOUNT BY USERNAME",
+					"item": [
+						{
+							"name": "STATUS 200 V",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQURNSU4iLCJlbWFpbCI6ImFkbWluQHB0bWVnYWhlcmEuY29tIiwiZmlyc3ROYW1lIjpudWxsLCJsYXN0TmFtZSI6bnVsbCwiYmlydGhkYXRlIjpudWxsLCJhZGRyZXNzIjpudWxsLCJjaXR5IjpudWxsLCJwcm92aW5jZSI6bnVsbCwicGhvbmUiOm51bGwsImlhdCI6MTY4NzM0Nzc3NiwiZXhwIjoxNjg3MzQ5NTc2fQ.6I-RuPUCowCNLwTsXYWaHPCsXT8-fGJHNE6vOkf1YUM",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/account?username=bakso",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"account"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "bakso"
+										}
+									]
+								},
+								"description": "StartFragment\n\nEndpoint ini dapat diakses oleh admin saja. Endpoint ini berfungsi untuk menampilkan data akun yang terdaftar didalam database berdasarkan username.\n\nEndFragmen"
+							},
+							"response": []
+						},
+						{
+							"name": "STATUS 404 V",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQURNSU4iLCJlbWFpbCI6ImFkbWluQHB0bWVnYWhlcmEuY29tIiwiZmlyc3ROYW1lIjpudWxsLCJsYXN0TmFtZSI6bnVsbCwiYmlydGhkYXRlIjpudWxsLCJhZGRyZXNzIjpudWxsLCJjaXR5IjpudWxsLCJwcm92aW5jZSI6bnVsbCwicGhvbmUiOm51bGwsImlhdCI6MTY4NzM0Nzc3NiwiZXhwIjoxNjg3MzQ5NTc2fQ.6I-RuPUCowCNLwTsXYWaHPCsXT8-fGJHNE6vOkf1YUM",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/account?username=bakso",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"account"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "bakso"
+										}
+									]
+								},
+								"description": "Endpoint ini dapat diakses oleh admin saja. Endpoint ini berfungsi untuk menampilkan pesan eror ketika username yang dicari tidak ditemukan atau tidak terdaftar didalam database.\n\nEndFragme"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET ALL DATA ACCOUNT",
+					"item": [
+						{
+							"name": "STATUS 200",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQURNSU4iLCJlbWFpbCI6ImFkbWluQHB0bWVnYWhlcmEuY29tIiwiZmlyc3ROYW1lIjpudWxsLCJsYXN0TmFtZSI6bnVsbCwiYmlydGhkYXRlIjpudWxsLCJhZGRyZXNzIjpudWxsLCJjaXR5IjpudWxsLCJwcm92aW5jZSI6bnVsbCwicGhvbmUiOm51bGwsImlhdCI6MTY4NTIxMDYwNywiZXhwIjoxNjg1MjEyNDA3fQ.W68OWIA0rGx50klbCnUlHnDHlnxmvOK79fkmKyUOncw",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/api/account/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"account",
+										""
+									]
+								},
+								"description": "StartFragment\n\nEndpoint ini dapat diakses oleh admin saja. Endpoint ini berfungsi untuk menampilkan data semua data akun yang terdaftar.\n\nEndFragment"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DELETE ACCOUNT BY USERNAME",
+					"item": [
+						{
+							"name": "STATUS 200",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQURNSU4iLCJlbWFpbCI6ImFkbWluQHB0bWVnYWhlcmEuY29tIiwiZmlyc3ROYW1lIjpudWxsLCJsYXN0TmFtZSI6bnVsbCwiYmlydGhkYXRlIjpudWxsLCJhZGRyZXNzIjpudWxsLCJjaXR5IjpudWxsLCJwcm92aW5jZSI6bnVsbCwicGhvbmUiOm51bGwsImlhdCI6MTY4NTIxMTE1OCwiZXhwIjoxNjg1MjEyOTU4fQ.Ens8918tgU4sqtU3wK5SNXapYj_rZYvFDIiOB0p42_Y",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "{{host}}/api/delete/account/varg",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"delete",
+										"account",
+										"varg"
+									]
+								},
+								"description": "StartFragment\n\nEndpoint ini dapat diakses oleh admin saja. Endpoint ini berfungsi untuk menghapus akun dengan menggunakan username user."
+							},
+							"response": []
+						},
+						{
+							"name": "STATUS 404",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQURNSU4iLCJlbWFpbCI6ImFkbWluQHB0bWVnYWhlcmEuY29tIiwiZmlyc3ROYW1lIjpudWxsLCJsYXN0TmFtZSI6bnVsbCwiYmlydGhkYXRlIjpudWxsLCJhZGRyZXNzIjpudWxsLCJjaXR5IjpudWxsLCJwcm92aW5jZSI6bnVsbCwicGhvbmUiOm51bGwsImlhdCI6MTY4NTIxMTE1OCwiZXhwIjoxNjg1MjEyOTU4fQ.Ens8918tgU4sqtU3wK5SNXapYj_rZYvFDIiOB0p42_Y",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "{{host}}/api/delete/account/varg",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"delete",
+										"account",
+										"varg"
+									]
+								},
+								"description": "StartFragment\n\nEndpoint ini dapat diakses oleh admin saja. Endpoint ini berfungsi untuk menampilkan pesan eror ketika username yang dicari tidak ditemukan atau tidak terdaftar didalam database.\n\nEndFragment"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "CUSTOMER",
+			"item": [
+				{
+					"name": "REGISTER V",
+					"item": [
+						{
+							"name": "STATUS 201",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "test5@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "test5",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "@Qwerty45",
+											"type": "text"
+										},
+										{
+											"key": "firstName",
+											"value": "test",
+											"type": "text"
+										},
+										{
+											"key": "lastName",
+											"value": "5",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "adududud",
+											"type": "text"
+										},
+										{
+											"key": "city",
+											"value": "adudud",
+											"type": "text"
+										},
+										{
+											"key": "birthdate",
+											"value": "12/04/2021",
+											"type": "text"
+										},
+										{
+											"key": "province",
+											"value": "adududu",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "123123",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/register/account/customer",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"register",
+										"account",
+										"customer"
+									]
+								},
+								"description": "StartFragment\n\nEndpoint ini dapat diakses oleh customer. Endpoint ini berfungsi untuk menambahkan atau membuat akun baru untuk customer\n\nEndFragment"
+							},
+							"response": []
+						},
+						{
+							"name": "STATUS 400",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "test2",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "@Qwerty45",
+											"type": "text"
+										},
+										{
+											"key": "firstName",
+											"value": "test",
+											"type": "text"
+										},
+										{
+											"key": "lastName",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "adududud",
+											"type": "text"
+										},
+										{
+											"key": "city",
+											"value": "adudud",
+											"type": "text"
+										},
+										{
+											"key": "birthdate",
+											"value": "12/04/2021",
+											"type": "text"
+										},
+										{
+											"key": "province",
+											"value": "adududu",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "123123",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/register/account/customer",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"register",
+										"account",
+										"customer"
+									]
+								},
+								"description": "Endpoint ini dapat diakses oleh customer. Endpoint ini berfungsi untuk menampilkan pesan eror ketika user melakukan kesalahan ketika sedang mengisi form register."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ADD CART V",
+					"item": [
+						{
+							"name": "STATUS 201",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQ1NUMDAzIiwiZW1haWwiOiJ0ZXN0MUBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0IiwibGFzdE5hbWUiOiIxIiwiYmlydGhkYXRlIjoiMjAyMS0xMi0wNCIsImFkZHJlc3MiOiJhZHVkdWR1ZCIsImNpdHkiOiJhZHVkdWQiLCJwcm92aW5jZSI6ImFkdWR1ZHUiLCJwaG9uZSI6IjEyMzEyMyIsImlhdCI6MTY4NzI2OTY2NSwiZXhwIjoxNjg3MjcxNDY1fQ.pMpFRnncBq4RNyKeX0Z2d4r1LXBsjwI7KxoqHC4zlxg",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "OWI",
+											"type": "text"
+										},
+										{
+											"key": "quantity",
+											"value": "2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/add/cart",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"add",
+										"cart"
+									]
+								},
+								"description": "Endpoint ini dapat diakses oleh customer. Endpoint ini berfungsi untuk menambahkan produk kedalam cart."
+							},
+							"response": []
+						},
+						{
+							"name": "STATUS 400",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQ1NUMDAzIiwiZW1haWwiOiJ0ZXN0MUBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0IiwibGFzdE5hbWUiOiIxIiwiYmlydGhkYXRlIjoiMjAyMS0xMi0wNCIsImFkZHJlc3MiOiJhZHVkdWR1ZCIsImNpdHkiOiJhZHVkdWQiLCJwcm92aW5jZSI6ImFkdWR1ZHUiLCJwaG9uZSI6IjEyMzEyMyIsImlhdCI6MTY4NzI2NTIxOSwiZXhwIjoxNjg3MjY3MDE5fQ.lmgmNwHjO6hYngMljdy-sQw09JVvO6z8bWc_VvcsLIQ",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "LAMP E",
+											"type": "text"
+										},
+										{
+											"key": "quantity",
+											"value": "2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/add/cart",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"add",
+										"cart"
+									]
+								},
+								"description": "Endpoint ini dapat diakses oleh customer. Endpoint ini berfungsi untuk menampilkan pesan eror ketika user melakukan kesalahan ketika sedang mengisi form add cart"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET CART V",
+					"item": [
+						{
+							"name": "STATUS 201",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								},
+								"description": "Endpoint ini dapat diakses oleh customer. Endpoint ini berfungsi untuk menampilkan produk yang ada didalam cart."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "UPDATE CART BY ITEM",
+					"item": [
+						{
+							"name": "STATUS 201",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": ""
+								},
+								"description": "Endpoint ini dapat diakses oleh customer. Endpoint ini berfungsi untuk mengubah cart berdasarkan nama item."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "REMOVE CART BY NAME ITEM",
+					"item": [
+						{
+							"name": "STATUS 201",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/cart/:name",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"cart",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "LED 4W LITE"
+										}
+									]
+								},
+								"description": "Endpoint ini dapat diakses oleh customer. Endpoint ini berfungsi untuk menghapus cart berdasarkan nama item."
+							},
+							"response": []
+						},
+						{
+							"name": "STATUS 404",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQ1NUMDAzIiwiZW1haWwiOiJ0ZXN0MUBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0IiwibGFzdE5hbWUiOiIxIiwiYmlydGhkYXRlIjoiMjAyMS0xMi0wNCIsImFkZHJlc3MiOiJhZHVkdWR1ZCIsImNpdHkiOiJhZHVkdWQiLCJwcm92aW5jZSI6ImFkdWR1ZHUiLCJwaG9uZSI6IjEyMzEyMyIsImlhdCI6MTY4NzM0NjE1OCwiZXhwIjoxNjg3MzQ3OTU4fQ.WkoupfyrtqlhJHv_2tY8kSIZVYv7kzBnt3QcBcfZu0I",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/cart/:name",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"cart",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "LED"
+										}
+									]
+								},
+								"description": "Endpoint ini dapat diakses oleh customer. Endpoint ini berfungsi untuk menampilkan pesan eror ketika nama item tidak terdaftar atau ditemukan."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DELETE ALL CART",
+					"item": [
+						{
+							"name": "STATUS 201",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQ1NUMDAzIiwiZW1haWwiOiJ0ZXN0MUBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0IiwibGFzdE5hbWUiOiIxIiwiYmlydGhkYXRlIjoiMjAyMS0xMi0wNCIsImFkZHJlc3MiOiJhZHVkdWR1ZCIsImNpdHkiOiJhZHVkdWQiLCJwcm92aW5jZSI6ImFkdWR1ZHUiLCJwaG9uZSI6IjEyMzEyMyIsImlhdCI6MTY4NzM0NjQxNCwiZXhwIjoxNjg3MzQ4MjE0fQ.mOnBA_QwfktZC40RSIsjZ2yEkprIq332-HIyCtBYm7E",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/cart",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"cart"
+									]
+								},
+								"description": "Endpoint ini dapat diakses oleh customer. Endpoint ini berfungsi untuk menghapus keseluruhan cart"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CHECKOUT",
+					"item": [
+						{
+							"name": "STATUS 200",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQ1NUMDAxIiwiZW1haWwiOiJ2YXJnQGdtYWlsLmNvbSIsImZpcnN0TmFtZSI6ImFkdSIsImxhc3ROYW1lIjoiYWR1ZHVkdSIsImJpcnRoZGF0ZSI6IjIwMjEtMTItMDQiLCJhZGRyZXNzIjoiYWR1ZHVkdWQiLCJjaXR5IjoiYWR1ZHVkIiwicHJvdmluY2UiOiJhZHVkdWR1IiwicGhvbmUiOiIxMjMxMjMiLCJpYXQiOjE2ODYxNTU4MjQsImV4cCI6MTY4NjE1NzYyNH0.CqcG7y1pmEvmPvQZ22Ii-BgFQUQUX7q16jBAjmlJy1o",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "a",
+											"type": "text"
+										},
+										{
+											"key": "courier",
+											"value": "a",
+											"type": "text"
+										},
+										{
+											"key": "deliver_type",
+											"value": "a",
+											"type": "text"
+										},
+										{
+											"key": "deliver_fee",
+											"value": "30000",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "a",
+											"type": "text"
+										},
+										{
+											"key": "zipcode",
+											"value": "a",
+											"type": "text"
+										},
+										{
+											"key": "city",
+											"value": "a",
+											"type": "text"
+										},
+										{
+											"key": "province",
+											"value": "a",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "123",
+											"type": "text"
+										},
+										{
+											"key": "note",
+											"value": "a",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/api/checkout",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"checkout"
+									]
+								},
+								"description": "Endpoint ini dapat diakses oleh customer. Endpoint ini berfungsi untuk melakukan transaksi atau pembelian."
+							},
+							"response": []
+						},
+						{
+							"name": "STATUS 400",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQ1NUMDAxIiwiZW1haWwiOiJ2YXJnQGdtYWlsLmNvbSIsImZpcnN0TmFtZSI6ImFkdSIsImxhc3ROYW1lIjoiYWR1ZHVkdSIsImJpcnRoZGF0ZSI6IjIwMjEtMTItMDQiLCJhZGRyZXNzIjoiYWR1ZHVkdWQiLCJjaXR5IjoiYWR1ZHVkIiwicHJvdmluY2UiOiJhZHVkdWR1IiwicGhvbmUiOiIxMjMxMjMiLCJpYXQiOjE2ODYxNTU4MjQsImV4cCI6MTY4NjE1NzYyNH0.CqcG7y1pmEvmPvQZ22Ii-BgFQUQUX7q16jBAjmlJy1o",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "a",
+											"type": "text"
+										},
+										{
+											"key": "courier",
+											"value": "a",
+											"type": "text"
+										},
+										{
+											"key": "deliver_type",
+											"value": "a",
+											"type": "text"
+										},
+										{
+											"key": "deliver_fee",
+											"value": "30000",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "a",
+											"type": "text"
+										},
+										{
+											"key": "zipcode",
+											"value": "a",
+											"type": "text"
+										},
+										{
+											"key": "city",
+											"value": "a",
+											"type": "text"
+										},
+										{
+											"key": "province",
+											"value": "a",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "123",
+											"type": "text"
+										},
+										{
+											"key": "note",
+											"value": "a",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/api/checkout",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"checkout"
+									]
+								},
+								"description": "Endpoint ini dapat diakses oleh customer. Endpoint ini berfungsi untuk menampilkan pesan eror ketika user melakukan kesalahan ketika sedang mengisi form checkout"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "DEVELOPER V",
+			"item": [
+				{
+					"name": "GET ALL PRODUCT",
+					"item": [
+						{
+							"name": "STATUS 201",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF9kZXZlbG9wZXIiOiJERVYwMDEiLCJlbWFpbCI6ImFkbWlua2VjZUBqb25vLmNvbSIsInVzZXJuYW1lIjoiYWRtaW5rZWNlaCIsImJhbGFuY2UiOjEwMDAwLCJpYXQiOjE2ODcyNzE1MTUsImV4cCI6MTY4NzI3MzMxNX0.k3WzkgxpU1Bi66j85o3OFHrKrZtkS7fQcdDk51gvpPk",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/developer/product",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"developer",
+										"product"
+									]
+								},
+								"description": "Endpoint ini dapat diakses oleh developer. Endpoint ini berfungsi untuk menampilkan produk yang tersedia dan terdaftar didalam database."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "TOP UP BALANCE",
+					"item": [
+						{
+							"name": "STATUS 201",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiREVWMDAxIiwiZW1haWwiOiJhZG1pbmtlY2VAam9uby5jb20iLCJ1c2VybmFtZSI6ImFkbWlua2VjZWgiLCJiYWxhbmNlIjoxMDAwMCwiaWF0IjoxNjg3MjcxMjE2LCJleHAiOjE2ODcyNzMwMTZ9.2SL15f5NIuqPG8wjTQpgqGy9g4F4S16Tun9GvMMZK6o",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/developer/topup",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"developer",
+										"topup"
+									]
+								},
+								"description": "Endpoint ini dapat diakses oleh developer. Endpoint ini berfungsi untuk melakukan topup yang berfungsi developer untuk mengakses produk yang tersedia."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "REGISTER ACCOUNT",
+					"item": [
+						{
+							"name": "STATUS 201",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "adminkece2@jono.com",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "adminkeceh2",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/register/account/developer",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"register",
+										"account",
+										"developer"
+									]
+								},
+								"description": "Endpoint ini dapat diakses oleh developer. Endpoint ini berfungsi untuk menambahkan atau membuat akun baru untuk developer."
+							},
+							"response": []
+						},
+						{
+							"name": "STATUS 400",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "adminkece2@jono.com",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "adminkeceh2",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/register/account/developer",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"register",
+										"account",
+										"developer"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "LOGIN ACCOUNT",
+					"item": [
+						{
+							"name": "STATUS 200",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "adminkece@jono.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/developer/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"developer",
+										"login"
+									]
+								},
+								"description": "Endpoint ini dapat diakses oleh customer. Endpoint ini berfungsi untuk login khusus developer yang nanti menghasilkan x-auth-token untuk mengakses halaman get all product dan top up balance."
+							},
+							"response": []
+						},
+						{
+							"name": "STATUS 400",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "adminkece@jono.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/developer/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"developer",
+										"login"
+									]
+								},
+								"description": "StartFragment\n\nEndpoint ini dapat diakses oleh developer. Endpoint ini berfungsi untuk menampilkan pesan eror ketika user melakukan kesalahan ketika sedang mengisi form login.\n\nEndFragment"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "LOGIN V",
+			"item": [
+				{
+					"name": "WITH EMAIL AND PASSWORD",
+					"item": [
+						{
+							"name": "STATUS 200",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "kuntowijo@ptmegahera.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"login"
+									]
+								},
+								"description": "StartFragment\n\nEndpoint ini dapat diakses oleh customer, admin dan staff. Fungsi login ini menghasilkan x-auth-token untuk mengakses end point yang berfungsi sesuai dengan rolenya.\n\nEndFragmenEndFragme"
+							},
+							"response": []
+						},
+						{
+							"name": "STATUS 400",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "test5@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "775",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"login"
+									]
+								},
+								"description": "Endpoint ini dapat diakses oleh customer, admin dan staff. Endpoint ini berfungsi untuk menampilkan pesan eror ketika user melakukan kesalahan ketika sedang mengisi form login.\n\nEndFragment"
+							},
+							"response": []
+						},
+						{
+							"name": "STATUS 404",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "test9@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"login"
+									]
+								},
+								"description": "Endpoint ini dapat diakses oleh customer. Endpoint ini berfungsi untuk menampilkan pesan eror ketika email tidak terdaftar."
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
