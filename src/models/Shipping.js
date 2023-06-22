@@ -8,7 +8,7 @@ class Shipping extends Model {
 }
 Shipping.init(
     {
-        id_shipping: {
+        id: {
             type: DataTypes.STRING(255),
             primaryKey: true,
             allowNull: false

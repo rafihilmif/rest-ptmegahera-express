@@ -142,11 +142,13 @@ router.post('/checkout', async function (req, res) {
                         id_user: {
                             [Op.like]: userdata.id_user
                         }
-                    },
-                    truncate: true
+                    }
                 }
             );
-            return res.status(201).send({ subtotal });
+            return res.status(201).send({
+                message: "Berhasil Checkout",
+                newOrder
+            });
 
         }
         else {
@@ -225,7 +227,7 @@ router.post('/charge', async function (req, res) {
     }
 });
 //CHECK STATUS PAYMENT AND UPDATE ORDER
-router.get('/status', async function (req, res) {
+router.get('/payment/status', async function (req, res) {
     let { order_id } = req.query;
     let token = req.header('x-auth-token');
     let userdata = jwt.verify(token, JWT_KEY);
