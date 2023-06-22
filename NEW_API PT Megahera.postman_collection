@@ -1803,25 +1803,26 @@
 					"name": "GET ALL DATA ACCOUNT",
 					"item": [
 						{
-							"name": "STATUS 200",
+							"name": "STATUS 200 V",
 							"request": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "x-auth-token",
-										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQURNSU4iLCJlbWFpbCI6ImFkbWluQHB0bWVnYWhlcmEuY29tIiwiZmlyc3ROYW1lIjpudWxsLCJsYXN0TmFtZSI6bnVsbCwiYmlydGhkYXRlIjpudWxsLCJhZGRyZXNzIjpudWxsLCJjaXR5IjpudWxsLCJwcm92aW5jZSI6bnVsbCwicGhvbmUiOm51bGwsImlhdCI6MTY4NTIxMDYwNywiZXhwIjoxNjg1MjEyNDA3fQ.W68OWIA0rGx50klbCnUlHnDHlnxmvOK79fkmKyUOncw",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQURNSU4iLCJlbWFpbCI6ImFkbWluQHB0bWVnYWhlcmEuY29tIiwiZmlyc3ROYW1lIjpudWxsLCJsYXN0TmFtZSI6bnVsbCwiYmlydGhkYXRlIjpudWxsLCJhZGRyZXNzIjpudWxsLCJjaXR5IjpudWxsLCJwcm92aW5jZSI6bnVsbCwicGhvbmUiOm51bGwsImlhdCI6MTY4NzM5Njk0MywiZXhwIjoxNjg3Mzk4NzQzfQ.2wmspt9fm6Mboio3vlc4EUp0-m8QKVJcfjKO6LuGSz8",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/api/account/",
+									"raw": "http://localhost:3000/api/account",
+									"protocol": "http",
 									"host": [
-										"{{host}}"
+										"localhost"
 									],
+									"port": "3000",
 									"path": [
 										"api",
-										"account",
-										""
+										"account"
 									]
 								},
 								"description": "StartFragment\n\nEndpoint ini dapat diakses oleh admin saja. Endpoint ini berfungsi untuk menampilkan data semua data akun yang terdaftar.\n\nEndFragment"
@@ -1834,13 +1835,13 @@
 					"name": "DELETE ACCOUNT BY USERNAME",
 					"item": [
 						{
-							"name": "STATUS 200",
+							"name": "STATUS 200 V",
 							"request": {
 								"method": "DELETE",
 								"header": [
 									{
 										"key": "x-auth-token",
-										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQURNSU4iLCJlbWFpbCI6ImFkbWluQHB0bWVnYWhlcmEuY29tIiwiZmlyc3ROYW1lIjpudWxsLCJsYXN0TmFtZSI6bnVsbCwiYmlydGhkYXRlIjpudWxsLCJhZGRyZXNzIjpudWxsLCJjaXR5IjpudWxsLCJwcm92aW5jZSI6bnVsbCwicGhvbmUiOm51bGwsImlhdCI6MTY4NTIxMTE1OCwiZXhwIjoxNjg1MjEyOTU4fQ.Ens8918tgU4sqtU3wK5SNXapYj_rZYvFDIiOB0p42_Y",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQURNSU4iLCJlbWFpbCI6ImFkbWluQHB0bWVnYWhlcmEuY29tIiwiZmlyc3ROYW1lIjpudWxsLCJsYXN0TmFtZSI6bnVsbCwiYmlydGhkYXRlIjpudWxsLCJhZGRyZXNzIjpudWxsLCJjaXR5IjpudWxsLCJwcm92aW5jZSI6bnVsbCwicGhvbmUiOm51bGwsImlhdCI6MTY4NzM5ODE0MSwiZXhwIjoxNjg3Mzk5OTQxfQ._a5d-caBZ4_VYBpsHLYGf5IIxGwW0Fcns8Y3gzZ9AkE",
 										"type": "text"
 									}
 								],
@@ -1849,15 +1850,22 @@
 									"urlencoded": []
 								},
 								"url": {
-									"raw": "{{host}}/api/delete/account/varg",
+									"raw": "http://localhost:3000/api/delete/account?username=test1",
+									"protocol": "http",
 									"host": [
-										"{{host}}"
+										"localhost"
 									],
+									"port": "3000",
 									"path": [
 										"api",
 										"delete",
-										"account",
-										"varg"
+										"account"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "test1"
+										}
 									]
 								},
 								"description": "StartFragment\n\nEndpoint ini dapat diakses oleh admin saja. Endpoint ini berfungsi untuk menghapus akun dengan menggunakan username user."
@@ -1865,13 +1873,13 @@
 							"response": []
 						},
 						{
-							"name": "STATUS 404",
+							"name": "STATUS 404 V",
 							"request": {
 								"method": "DELETE",
 								"header": [
 									{
 										"key": "x-auth-token",
-										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQURNSU4iLCJlbWFpbCI6ImFkbWluQHB0bWVnYWhlcmEuY29tIiwiZmlyc3ROYW1lIjpudWxsLCJsYXN0TmFtZSI6bnVsbCwiYmlydGhkYXRlIjpudWxsLCJhZGRyZXNzIjpudWxsLCJjaXR5IjpudWxsLCJwcm92aW5jZSI6bnVsbCwicGhvbmUiOm51bGwsImlhdCI6MTY4NTIxMTE1OCwiZXhwIjoxNjg1MjEyOTU4fQ.Ens8918tgU4sqtU3wK5SNXapYj_rZYvFDIiOB0p42_Y",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQURNSU4iLCJlbWFpbCI6ImFkbWluQHB0bWVnYWhlcmEuY29tIiwiZmlyc3ROYW1lIjpudWxsLCJsYXN0TmFtZSI6bnVsbCwiYmlydGhkYXRlIjpudWxsLCJhZGRyZXNzIjpudWxsLCJjaXR5IjpudWxsLCJwcm92aW5jZSI6bnVsbCwicGhvbmUiOm51bGwsImlhdCI6MTY4NzM5ODIwMiwiZXhwIjoxNjg3NDAwMDAyfQ.dV0ltC__95GKv-mJGlzv8rf9TGxPccGAbs4ziGWzpi0",
 										"type": "text"
 									}
 								],
@@ -1880,18 +1888,25 @@
 									"urlencoded": []
 								},
 								"url": {
-									"raw": "{{host}}/api/delete/account/varg",
+									"raw": "http://localhost:3000/api/delete/account?username=bakso",
+									"protocol": "http",
 									"host": [
-										"{{host}}"
+										"localhost"
 									],
+									"port": "3000",
 									"path": [
 										"api",
 										"delete",
-										"account",
-										"varg"
+										"account"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "bakso"
+										}
 									]
 								},
-								"description": "StartFragment\n\nEndpoint ini dapat diakses oleh admin saja. Endpoint ini berfungsi untuk menampilkan pesan eror ketika username yang dicari tidak ditemukan atau tidak terdaftar didalam database.\n\nEndFragment"
+								"description": "StartFragment\n\nEndpoint ini dapat diakses oleh admin saja. Endpoint ini berfungsi untuk menghapus akun dengan menggunakan username user."
 							},
 							"response": []
 						}
@@ -2073,7 +2088,7 @@
 								"header": [
 									{
 										"key": "x-auth-token",
-										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQ1NUMDAzIiwiZW1haWwiOiJ0ZXN0MUBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0IiwibGFzdE5hbWUiOiIxIiwiYmlydGhkYXRlIjoiMjAyMS0xMi0wNCIsImFkZHJlc3MiOiJhZHVkdWR1ZCIsImNpdHkiOiJhZHVkdWQiLCJwcm92aW5jZSI6ImFkdWR1ZHUiLCJwaG9uZSI6IjEyMzEyMyIsImlhdCI6MTY4NzI2OTY2NSwiZXhwIjoxNjg3MjcxNDY1fQ.pMpFRnncBq4RNyKeX0Z2d4r1LXBsjwI7KxoqHC4zlxg",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQ1NUMDA3IiwiZW1haWwiOiJ0ZXN0NUBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0IiwibGFzdE5hbWUiOiI1IiwiYmlydGhkYXRlIjoiMjAyMS0xMi0wNCIsImFkZHJlc3MiOiJhZHVkdWR1ZCIsImNpdHkiOiJhZHVkdWQiLCJwcm92aW5jZSI6ImFkdWR1ZHUiLCJwaG9uZSI6IjEyMzEyMyIsImlhdCI6MTY4NzQwODMyOCwiZXhwIjoxNjg3NDEwMTI4fQ.kASoqvfGGXu1KAZ_p-Bt-8DKQceX4Q3lZi4FR9s2z-E",
 										"type": "text"
 									}
 								],
@@ -2082,7 +2097,7 @@
 									"urlencoded": [
 										{
 											"key": "name",
-											"value": "OWI",
+											"value": "Selotip Khusus",
 											"type": "text"
 										},
 										{
@@ -2161,9 +2176,24 @@
 							"name": "STATUS 201",
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQ1NUMDA0IiwiZW1haWwiOiJ0ZXN0MkBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0IiwibGFzdE5hbWUiOiIyIiwiYmlydGhkYXRlIjoiMjAyMS0xMi0wNCIsImFkZHJlc3MiOiJhZHVkdWR1ZCIsImNpdHkiOiJhZHVkdWQiLCJwcm92aW5jZSI6ImFkdWR1ZHUiLCJwaG9uZSI6IjEyMzEyMyIsImlhdCI6MTY4NzQwMzc4NiwiZXhwIjoxNjg3NDA1NTg2fQ.qZ3gR2Hiz4aLdBFBHB2MDnh-H9r5n9smv6z6sG2AEkI",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": ""
+									"raw": "http://localhost:3000/api/cart",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"cart"
+									]
 								},
 								"description": "Endpoint ini dapat diakses oleh customer. Endpoint ini berfungsi untuk menampilkan produk yang ada didalam cart."
 							},
@@ -2175,12 +2205,44 @@
 					"name": "UPDATE CART BY ITEM",
 					"item": [
 						{
-							"name": "STATUS 201",
+							"name": "STATUS 201 V",
 							"request": {
 								"method": "PUT",
-								"header": [],
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQ1NUMDA0IiwiZW1haWwiOiJ0ZXN0MkBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0IiwibGFzdE5hbWUiOiIyIiwiYmlydGhkYXRlIjoiMjAyMS0xMi0wNCIsImFkZHJlc3MiOiJhZHVkdWR1ZCIsImNpdHkiOiJhZHVkdWQiLCJwcm92aW5jZSI6ImFkdWR1ZHUiLCJwaG9uZSI6IjEyMzEyMyIsImlhdCI6MTY4NzQwMzc4NiwiZXhwIjoxNjg3NDA1NTg2fQ.qZ3gR2Hiz4aLdBFBHB2MDnh-H9r5n9smv6z6sG2AEkI",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "quantity",
+											"value": "10",
+											"type": "text"
+										}
+									]
+								},
 								"url": {
-									"raw": ""
+									"raw": "http://localhost:3000/api/update/cart?name=LED 4W EL",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"update",
+										"cart"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "LED 4W EL"
+										}
+									]
 								},
 								"description": "Endpoint ini dapat diakses oleh customer. Endpoint ini berfungsi untuk mengubah cart berdasarkan nama item."
 							},
@@ -2192,18 +2254,18 @@
 					"name": "REMOVE CART BY NAME ITEM",
 					"item": [
 						{
-							"name": "STATUS 201",
+							"name": "STATUS 201 V",
 							"request": {
 								"method": "DELETE",
 								"header": [
 									{
 										"key": "x-auth-token",
-										"value": "",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQ1NUMDA0IiwiZW1haWwiOiJ0ZXN0MkBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0IiwibGFzdE5hbWUiOiIyIiwiYmlydGhkYXRlIjoiMjAyMS0xMi0wNCIsImFkZHJlc3MiOiJhZHVkdWR1ZCIsImNpdHkiOiJhZHVkdWQiLCJwcm92aW5jZSI6ImFkdWR1ZHUiLCJwaG9uZSI6IjEyMzEyMyIsImlhdCI6MTY4NzQwMzc4NiwiZXhwIjoxNjg3NDA1NTg2fQ.qZ3gR2Hiz4aLdBFBHB2MDnh-H9r5n9smv6z6sG2AEkI",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "http://localhost:3000/api/cart/:name",
+									"raw": "http://localhost:3000/api/cart?name=LED 4W EL",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -2211,51 +2273,16 @@
 									"port": "3000",
 									"path": [
 										"api",
-										"cart",
-										":name"
+										"cart"
 									],
-									"variable": [
+									"query": [
 										{
 											"key": "name",
-											"value": "LED 4W LITE"
+											"value": "LED 4W EL"
 										}
 									]
 								},
 								"description": "Endpoint ini dapat diakses oleh customer. Endpoint ini berfungsi untuk menghapus cart berdasarkan nama item."
-							},
-							"response": []
-						},
-						{
-							"name": "STATUS 404",
-							"request": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "x-auth-token",
-										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQ1NUMDAzIiwiZW1haWwiOiJ0ZXN0MUBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0IiwibGFzdE5hbWUiOiIxIiwiYmlydGhkYXRlIjoiMjAyMS0xMi0wNCIsImFkZHJlc3MiOiJhZHVkdWR1ZCIsImNpdHkiOiJhZHVkdWQiLCJwcm92aW5jZSI6ImFkdWR1ZHUiLCJwaG9uZSI6IjEyMzEyMyIsImlhdCI6MTY4NzM0NjE1OCwiZXhwIjoxNjg3MzQ3OTU4fQ.WkoupfyrtqlhJHv_2tY8kSIZVYv7kzBnt3QcBcfZu0I",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "http://localhost:3000/api/cart/:name",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "3000",
-									"path": [
-										"api",
-										"cart",
-										":name"
-									],
-									"variable": [
-										{
-											"key": "name",
-											"value": "LED"
-										}
-									]
-								},
-								"description": "Endpoint ini dapat diakses oleh customer. Endpoint ini berfungsi untuk menampilkan pesan eror ketika nama item tidak terdaftar atau ditemukan."
 							},
 							"response": []
 						}
@@ -2271,7 +2298,7 @@
 								"header": [
 									{
 										"key": "x-auth-token",
-										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQ1NUMDAzIiwiZW1haWwiOiJ0ZXN0MUBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0IiwibGFzdE5hbWUiOiIxIiwiYmlydGhkYXRlIjoiMjAyMS0xMi0wNCIsImFkZHJlc3MiOiJhZHVkdWR1ZCIsImNpdHkiOiJhZHVkdWQiLCJwcm92aW5jZSI6ImFkdWR1ZHUiLCJwaG9uZSI6IjEyMzEyMyIsImlhdCI6MTY4NzM0NjQxNCwiZXhwIjoxNjg3MzQ4MjE0fQ.mOnBA_QwfktZC40RSIsjZ2yEkprIq332-HIyCtBYm7E",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiQ1NUMDA2IiwiZW1haWwiOiJ0ZXN0NEBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0IiwibGFzdE5hbWUiOiI0IiwiYmlydGhkYXRlIjoiMjAyMS0xMi0wNCIsImFkZHJlc3MiOiJhZHVkdWR1ZCIsImNpdHkiOiJhZHVkdWQiLCJwcm92aW5jZSI6ImFkdWR1ZHUiLCJwaG9uZSI6IjEyMzEyMyIsImlhdCI6MTY4NzQwNDY5MCwiZXhwIjoxNjg3NDA2NDkwfQ.gQmqKDDD1DHrOWzVk_9pIFm0ZNTzAwkt4pLPHjx7KnQ",
 										"type": "text"
 									}
 								],
@@ -2312,17 +2339,17 @@
 									"urlencoded": [
 										{
 											"key": "name",
-											"value": "a",
+											"value": "Jono",
 											"type": "text"
 										},
 										{
 											"key": "courier",
-											"value": "a",
+											"value": "JNT",
 											"type": "text"
 										},
 										{
 											"key": "deliver_type",
-											"value": "a",
+											"value": "1",
 											"type": "text"
 										},
 										{
@@ -2332,47 +2359,49 @@
 										},
 										{
 											"key": "address",
-											"value": "a",
+											"value": "Jalan Terus Pantang Mundur",
 											"type": "text"
 										},
 										{
 											"key": "zipcode",
-											"value": "a",
+											"value": "666858",
 											"type": "text"
 										},
 										{
 											"key": "city",
-											"value": "a",
+											"value": "Sidoarjo",
 											"type": "text"
 										},
 										{
 											"key": "province",
-											"value": "a",
+											"value": "Jawa Timur",
 											"type": "text"
 										},
 										{
 											"key": "phone",
-											"value": "123",
+											"value": "12345678",
 											"type": "text"
 										},
 										{
 											"key": "note",
-											"value": "a",
+											"value": "Yang Cepet ya",
 											"type": "text"
 										}
 									]
 								},
 								"url": {
-									"raw": "{{host}}/api/checkout",
+									"raw": "http://localhost:3000/api/checkout",
+									"protocol": "http",
 									"host": [
-										"{{host}}"
+										"localhost"
 									],
+									"port": "3000",
 									"path": [
 										"api",
 										"checkout"
 									]
 								},
-								"description": "Endpoint ini dapat diakses oleh customer. Endpoint ini berfungsi untuk melakukan transaksi atau pembelian."
+								"description": "Endpoint ini dapat diakses oleh customer. Endpoint ini berfungsi untuk menampilkan pesan eror ketika user melakukan kesalahan ketika sedang mengisi form checkout"
 							},
 							"response": []
 						},
@@ -2392,17 +2421,17 @@
 									"urlencoded": [
 										{
 											"key": "name",
-											"value": "a",
+											"value": "Jono",
 											"type": "text"
 										},
 										{
 											"key": "courier",
-											"value": "a",
+											"value": "JNT",
 											"type": "text"
 										},
 										{
 											"key": "deliver_type",
-											"value": "a",
+											"value": "CEPAT",
 											"type": "text"
 										},
 										{
@@ -2412,41 +2441,43 @@
 										},
 										{
 											"key": "address",
-											"value": "a",
+											"value": "Jalan Terus Pantang Mundur",
 											"type": "text"
 										},
 										{
 											"key": "zipcode",
-											"value": "a",
+											"value": "666858",
 											"type": "text"
 										},
 										{
 											"key": "city",
-											"value": "a",
+											"value": "Sidoarjo",
 											"type": "text"
 										},
 										{
 											"key": "province",
-											"value": "a",
+											"value": "Jawa Timur",
 											"type": "text"
 										},
 										{
 											"key": "phone",
-											"value": "123",
+											"value": "12345678",
 											"type": "text"
 										},
 										{
 											"key": "note",
-											"value": "a",
+											"value": "Yang Cepet ya",
 											"type": "text"
 										}
 									]
 								},
 								"url": {
-									"raw": "{{host}}/api/checkout",
+									"raw": "http://localhost:3000/api/checkout",
+									"protocol": "http",
 									"host": [
-										"{{host}}"
+										"localhost"
 									],
+									"port": "3000",
 									"path": [
 										"api",
 										"checkout"
@@ -2725,12 +2756,12 @@
 									"urlencoded": [
 										{
 											"key": "email",
-											"value": "kuntowijo@ptmegahera.com",
+											"value": "test5@gmail.com",
 											"type": "text"
 										},
 										{
 											"key": "password",
-											"value": "123",
+											"value": "@Qwerty45",
 											"type": "text"
 										}
 									]
