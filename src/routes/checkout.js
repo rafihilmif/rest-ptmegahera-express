@@ -284,6 +284,5 @@ router.get('/status', async function (req, res) {
     } catch (error) {
         return res.status(400).send('Invalid JWT Key');
     }
-
 });
 module.exports = router;
