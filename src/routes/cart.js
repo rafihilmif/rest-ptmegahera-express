@@ -91,6 +91,9 @@ router.post('/add/cart', async function (req, res) {
                 where: {
                     productName: {
                         [Op.like]: name
+                    },
+                    id_user: {
+                        [Op.like]: userdata.id_user
                     }
                 }
             });
