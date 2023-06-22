@@ -3,11 +3,10 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 20, 2023 at 01:15 PM
+-- Generation Time: Jun 22, 2023 at 06:36 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
-SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -21,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_ptmegahera`
 --
-CREATE DATABASE IF NOT EXISTS `db_ptmegahera` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `db_ptmegahera`;
 
 -- --------------------------------------------------------
 
@@ -30,7 +27,6 @@ USE `db_ptmegahera`;
 -- Table structure for table `carts`
 --
 
-DROP TABLE IF EXISTS `carts`;
 CREATE TABLE `carts` (
   `id_cart` varchar(255) NOT NULL,
   `id_user` varchar(255) NOT NULL,
@@ -46,9 +42,9 @@ CREATE TABLE `carts` (
 --
 
 INSERT INTO `carts` (`id_cart`, `id_user`, `id_product`, `productName`, `productPrice`, `quantity`, `created_at`) VALUES
-('CRT001', 'CST001', 'PRD001', 'AS', 15000, 5, '2023-06-07 21:09:37'),
-('CRT002', 'CST001', 'PRD001', 'AS', 15000, 2, '2023-06-07 22:42:11'),
-('CRT003', 'CST001', 'PRD001', 'AS', 15000, 3, '2023-06-07 23:32:26');
+('CRT002', 'CST004', 'PRD005', 'LED PACKAGE LITE', 300000, 2, '2023-06-22 10:27:43'),
+('CRT003', 'CST004', 'PRD006', 'Kabel Olor Khusus 2 Meter', 92000, 2, '2023-06-22 10:27:52'),
+('CRT004', 'CST004', 'PRD002', 'Selotip Khusus', 25000, 2, '2023-06-22 10:28:00');
 
 -- --------------------------------------------------------
 
@@ -56,7 +52,6 @@ INSERT INTO `carts` (`id_cart`, `id_user`, `id_product`, `productName`, `product
 -- Table structure for table `category`
 --
 
-DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `id_category` varchar(255) NOT NULL,
   `categoryName` varchar(255) NOT NULL,
@@ -69,7 +64,8 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id_category`, `categoryName`, `categoryDesc`, `status`) VALUES
-('CAT001', 'lampu', '123', 1);
+('CAT001', 'LED', '123', 1),
+('CAT002', 'Stopkontak', '5 Lubang', 1);
 
 -- --------------------------------------------------------
 
@@ -77,7 +73,6 @@ INSERT INTO `category` (`id_category`, `categoryName`, `categoryDesc`, `status`)
 -- Table structure for table `developer`
 --
 
-DROP TABLE IF EXISTS `developer`;
 CREATE TABLE `developer` (
   `id_developer` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -86,13 +81,20 @@ CREATE TABLE `developer` (
   `balance` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `developer`
+--
+
+INSERT INTO `developer` (`id_developer`, `email`, `username`, `password`, `balance`) VALUES
+('DEV001', 'adminkece@jono.com', 'adminkeceh', '$2b$10$7UhkZdq2oTkBbHVgHd6AeeDws686ekmH8T5JIxQ8M.XVyzM371k72', 15000),
+('DEV002', 'adminkece2@jono.com', 'adminkeceh2', '$2b$10$3NyPbNN5ONMkcwHTuIruCeetPNft85DyezRTWo4QrXoJZyu1rDbyG', 10000);
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `orders`
 --
 
-DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `id_order` varchar(255) NOT NULL,
   `id_user` varchar(255) NOT NULL,
@@ -116,7 +118,6 @@ CREATE TABLE `orders` (
 -- Table structure for table `products`
 --
 
-DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `id_product` varchar(255) NOT NULL,
   `id_supplier` varchar(255) NOT NULL,
@@ -135,8 +136,11 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id_product`, `id_supplier`, `id_category`, `sku`, `productName`, `productDesc`, `productPrice`, `productQuantity`, `productPicture`, `status`) VALUES
-('PRD001', 'SUP001', 'CAT001', 'HANLAMPSKN001', 'LAMP E', 'asss', 12, 123, 'picture-1685290068104-679078337.jpg', 1),
-('PRD002', 'SUP001', 'CAT001', 'HANLAMPSKN002', 'OWI', 'asss', 12, 123, 'picture-1685290068104-679078337.jpg', 1);
+('PRD002', 'SUP003', 'CAT002', 'INDSTOPSKN001', 'Selotip Khusus', 'Anti Kerut ', 25000, 10, 'picture-1687317188228-743879382.jpg', 1),
+('PRD003', 'SUP006', 'CAT001', 'ECOLEDSKN001', 'LED 4W EL', 'Garansi 1 Tahun', 35000, 10, 'picture-1687317267598-557639108.jpg', 1),
+('PRD004', 'SUP003', 'CAT001', 'INDLEDSKN001', 'Kabel Olor ', 'Garansi 1 Tahun', 110000, 10, 'picture-1687317299680-407069367.jpg', 1),
+('PRD005', 'SUP001', 'CAT001', 'HANLEDSKN001', 'LED PACKAGE LITE', 'Garansi 3 Tahun', 300000, 10, 'picture-1687317371550-268830375.jpg', 1),
+('PRD006', 'SUP003', 'CAT001', 'INDLEDSKN006', 'Kabel Olor Khusus 2 Meter', '4 Meter Garansi 10 Tahun', 92000, 20, 'picture-1687333392349-764798391.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -144,7 +148,6 @@ INSERT INTO `products` (`id_product`, `id_supplier`, `id_category`, `sku`, `prod
 -- Table structure for table `sequelizemeta`
 --
 
-DROP TABLE IF EXISTS `sequelizemeta`;
 CREATE TABLE `sequelizemeta` (
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -162,7 +165,6 @@ INSERT INTO `sequelizemeta` (`name`) VALUES
 -- Table structure for table `shippings`
 --
 
-DROP TABLE IF EXISTS `shippings`;
 CREATE TABLE `shippings` (
   `id` int(11) NOT NULL,
   `company_name` varchar(255) DEFAULT NULL,
@@ -188,7 +190,6 @@ INSERT INTO `shippings` (`id`, `company_name`, `fee_shippings`, `createdAt`, `up
 -- Table structure for table `suppliers`
 --
 
-DROP TABLE IF EXISTS `suppliers`;
 CREATE TABLE `suppliers` (
   `id_supplier` varchar(255) NOT NULL,
   `companyName` varchar(255) NOT NULL,
@@ -201,7 +202,11 @@ CREATE TABLE `suppliers` (
 --
 
 INSERT INTO `suppliers` (`id_supplier`, `companyName`, `companyLogo`, `status`) VALUES
-('SUP001', 'Hannochs', '1685284938931.jpg', 1);
+('SUP001', 'Hannochs', '1685284938931.jpg', 1),
+('SUP002', 'Kings Light', '1687262405099.jpg', 1),
+('SUP003', 'Indomaret', '1687263120474.jpg', 1),
+('SUP004', 'Alfamart', '1687263125238.jpg', 1),
+('SUP006', 'Eco Link', '1687263441617.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -209,7 +214,6 @@ INSERT INTO `suppliers` (`id_supplier`, `companyName`, `companyLogo`, `status`) 
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id_user` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -233,12 +237,12 @@ INSERT INTO `users` (`id_user`, `email`, `username`, `password`, `firstName`, `l
 ('ADMIN', 'admin@ptmegahera.com', NULL, '$2b$10$4dehBosAggDNkEJmBeYcYOxsX7kkw7QmhoQtT4SjuHRVoJEgmA14q', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
 ('CST001', 'varg@gmail.com', 'kegelapans', '$2b$10$l.sFxWfsP.KmT4tgR7FaOuRjpoFPlnAkT5EKsQHnb1ZGBXotbJrc2', 'adu', 'adududu', '2021-12-04', 'adududud', 'adudud', 'adududu', '123123', 1),
 ('CST002', 'baksobakar@yuhu.com', 'baksobakar', '$2b$10$.wTL94HCT5.gpkx1sbQsr.25NyXKL86D3Pxi6KE8dX0kHKHLWKuOe', 'bakso', 'bakar', '2000-04-04', 'Jalan baru tapi ga lama', 'Sidoarjo', 'Jawa Timur', '08123456789', 1),
-('CST003', 'test1@gmail.com', 'test1', '$2b$10$RwGTwJFUutzQYNtOwKJ1mOpm.JbuZdiBNmvS3BLEFctdvVzxu31zS', 'test', '1', '2021-12-04', 'adududud', 'adudud', 'adududu', '123123', 1),
 ('CST004', 'test2@gmail.com', 'test2', '$2b$10$3uTewlGZfhgVSYIWzD2oJe1QbTcm2Xnes5wb4gMyqpspD.KMl.1Lu', 'test', '2', '2021-12-04', 'adududud', 'adudud', 'adududu', '123123', 1),
 ('CST005', 'test3@gmail.com', 'test3', '$2b$10$iZjxdh2bhM8hng4Q0dqbNez4MBJCYpecJ5eZkkm8lzwVcuWwBa1Eq', 'test', '3', '2021-12-04', 'adududud', 'adudud', 'adududu', '123123', 1),
 ('CST006', 'test4@gmail.com', 'test4', '$2b$10$dmaNFNfDSv5F.3g1WJTQIexVwc8bQZmG3CRsHfmwhT3GHVyF9V/yi', 'test', '4', '2021-12-04', 'adududud', 'adudud', 'adududu', '123123', 1),
 ('CST007', 'test5@gmail.com', 'test5', '$2b$10$C1IauVpGSxL.JbHqxtV19eS1hG2dBArkYc/41j7QZurXNg8tSJCu2', 'test', '5', '2021-12-04', 'adududud', 'adudud', 'adududu', '123123', 1),
-('STF001', 'kuntowijo@ptmegahera.com', 'kuntowijo', '$2b$10$ujXcDIIGTjPxDiw4CI98T.LxTinR32y5Yc8JcDCvmdln/kZXZZtO6', 'Kunto', 'Wijoyo', '1995-12-03', 'Jalan Olahraga 5 No. 7', 'Surabaya', 'Jawa Timur', '08135155321', 1);
+('STF001', 'kuntowijo@ptmegahera.com', 'kuntowijo', '$2b$10$ujXcDIIGTjPxDiw4CI98T.LxTinR32y5Yc8JcDCvmdln/kZXZZtO6', 'Kunto', 'Wijoyo', '1995-12-03', 'Jalan Olahraga 5 No. 7', 'Surabaya', 'Jawa Timur', '08135155321', 1),
+('STF002', 'test1@admin01.com', 'boboteyus', '$2b$10$CnvwzyKmIG3H2Rz6tFX8seDzmsVBVvAG/krmeaKeBZ82LRnZ8kkVu', 'Jono', 'Turu', '2004-04-04', 'Tidur Nyeyak 007', 'Sidoarjo', 'Jawa Timur', '123456789', 11);
 
 --
 -- Indexes for dumped tables
@@ -308,7 +312,6 @@ ALTER TABLE `users`
 --
 ALTER TABLE `shippings`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
