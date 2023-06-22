@@ -306,7 +306,7 @@ router.put('/update/account', async function (req, res) {
     }
 
 });
-//GET ACCOUNT BY USERNAME
+////GET ALL ACCOUNT AND BY USERNAME
 router.get('/account', async function (req, res) {
     let { username } = req.query;
 
@@ -319,32 +319,35 @@ router.get('/account', async function (req, res) {
     try {
         if (userdata.id_user == "ADMIN") {
 
-            const dataUser = await User.findAll(
-                {
-                    where: {
-                        username: {
-                            [Op.like]: username
-                        }
-                    },
-                    attributes: {
-                        exclude: ['password', 'status']
-                    }
+            const dataUser = await User.findAll({
+                attributes: {
+                    exclude: ['password', 'status']
                 }
-            );
-
+            });
             if (dataUser.length === 0) {
                 return res.status(404).send({
-                    message: "Data dengan username " + username + " tidak ditemukan!"
+                    message: "Data user tidak ditemukan"
                 });
             }
             else {
                 if (username == null) {
-                    const dataAllUser = User.findAll();
-                    return res.status(200).send(dataAllUser);
+                    return res.status(200).send(dataUser);
                 }
                 else {
+                    const dataUserByName = await User.findAll(
+                        {
+                            where: {
+                                username: {
+                                    [Op.like]: username
+                                }
+                            },
+                            attributes: {
+                                exclude: ['password', 'status']
+                            }
+                        }
+                    );
                     return res.status(200).send({
-                        dataUser
+                        dataUserByName
                     });
                 }
             }
@@ -357,7 +360,7 @@ router.get('/account', async function (req, res) {
         return res.status(400).send('Invalid JWT Key');
     }
 });
-//GET ALL ACCOUNT
+
 //DELETE ACCOUNT
 router.delete('/delete/account', async function (req, res) {
     let { username } = req.query;
