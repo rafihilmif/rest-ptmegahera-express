@@ -360,7 +360,6 @@ router.get('/account', async function (req, res) {
         return res.status(400).send('Invalid JWT Key');
     }
 });
-
 //DELETE ACCOUNT
 router.delete('/delete/account', async function (req, res) {
     let { username } = req.query;
